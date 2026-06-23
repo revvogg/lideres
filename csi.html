@@ -1,0 +1,468 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nv:#0B1628;--nv2:#0F1E38;--nv3:#162848;--nv4:#1C3358;
+  --cy:#1AB8D8;--cy2:#0D8FAA;--cy3:rgba(26,184,216,.15);
+  --or:#E8420A;--or2:#FF6B35;--orb:rgba(232,66,10,.12);
+  --am:#EF9F27;
+  --w:#fff;--w80:rgba(255,255,255,.8);--w60:rgba(255,255,255,.6);
+  --w30:rgba(255,255,255,.3);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08);
+  --fz:16px;--fzs:14px;--fzxs:12px;
+}
+body{margin:0;padding:0;}
+.wrap{background:var(--nv);min-height:100vh;font-family:var(--font-sans);width:100%;}
+
+/* ENVELOPE */
+.env-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background:var(--nv2);}
+.env-eyebrow{font-size:var(--fzxs);letter-spacing:.18em;text-transform:uppercase;color:var(--cy);margin-bottom:2rem;text-align:center;}
+.env-outer{width:min(340px,90vw);cursor:pointer;position:relative;}
+.env-svg{width:100%;display:block;}
+.env-flap-anim{transform-origin:top center;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.env-flap-anim.open{transform:rotateX(180deg);}
+.env-letter{opacity:0;transform:translateY(0);transition:opacity .4s ease .3s, transform .5s ease .3s;}
+.env-letter.out{opacity:1;transform:translateY(-60px);}
+.env-hint{font-size:var(--fzs);color:var(--w30);margin-top:1.5rem;text-align:center;}
+.env-btn{margin-top:1.5rem;background:var(--cy);border:none;border-radius:10px;padding:14px 40px;font-size:var(--fz);font-weight:500;color:var(--nv);cursor:pointer;width:min(340px,90vw);}
+.env-btn:hover{background:#22d0f0;}
+
+/* CARTA */
+.carta-wrap{padding:1.5rem;max-width:640px;margin:0 auto;}
+.carta-paper{background:var(--nv3);border:1px solid var(--w15);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;}
+.carta-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:1.1rem;border-bottom:1px solid var(--w15);gap:12px;flex-wrap:wrap;}
+.carta-classify{background:var(--orb);border:1px solid var(--or);border-radius:5px;padding:4px 12px;font-size:var(--fzxs);letter-spacing:.1em;color:var(--or2);font-weight:500;white-space:nowrap;}
+.carta-body{font-size:var(--fzs);color:var(--w80);line-height:1.8;}
+.carta-body p{margin-bottom:1rem;}
+.carta-body .hl{color:var(--cy);font-weight:500;}
+.carta-body .hl-or{color:var(--or2);font-weight:500;}
+.carta-ass{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--w15);}
+.qr-box{background:var(--nv4);border:1px dashed var(--cy2);border-radius:10px;padding:1.1rem;display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;}
+.qr-ph{width:68px;height:68px;min-width:68px;background:var(--w08);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.qr-txt{font-size:var(--fzs);color:var(--w60);line-height:1.6;}
+.qr-url{font-size:var(--fzxs);color:var(--cy);margin-top:4px;word-break:break-all;}
+
+/* HERO */
+.hero{background:var(--nv2);padding:1.1rem 1.5rem;border-bottom:1px solid var(--w15);}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:.65rem;}
+.logo-text-top{font-size:var(--fzxs);letter-spacing:.12em;text-transform:uppercase;color:var(--w30);}
+.logo-text-main{font-size:var(--fzs);font-weight:500;color:var(--w);}
+.logo-text-main span{color:var(--cy);}
+.hero-case{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.case-pill{background:var(--orb);border:1px solid var(--or);border-radius:5px;padding:3px 10px;font-size:var(--fzxs);color:var(--or2);font-weight:500;letter-spacing:.06em;}
+.hero-title{font-size:clamp(18px,4vw,22px);font-weight:500;color:var(--w);line-height:1.25;margin-bottom:3px;}
+.hero-title em{color:var(--cy);font-style:normal;}
+.hero-sub{font-size:var(--fzs);color:var(--w60);}
+.agent-pill{background:var(--w08);border:1px solid var(--w30);border-radius:20px;padding:3px 10px;font-size:var(--fzxs);color:var(--w60);margin-left:auto;white-space:nowrap;}
+
+/* ID SCREEN */
+.id-wrap{padding:1.5rem;max-width:560px;margin:0 auto;}
+.lbl{font-size:var(--fzxs);letter-spacing:.12em;text-transform:uppercase;color:var(--w30);margin-bottom:.4rem;}
+.inp{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 16px;font-size:var(--fz);color:var(--w);outline:none;width:100%;font-family:var(--font-sans);}
+.inp::placeholder{color:var(--w30);}
+.inp:focus{border-color:var(--cy);}
+.sel{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 16px;font-size:var(--fz);color:var(--w);outline:none;width:100%;font-family:var(--font-sans);}
+.sel option{background:#1a2a45;}
+.info-box{background:var(--w08);border:1px solid var(--w15);border-radius:10px;padding:1rem;}
+.btn-p{background:var(--cy);border:none;border-radius:10px;padding:14px 24px;font-size:var(--fz);font-weight:500;color:var(--nv);cursor:pointer;width:100%;margin-top:.85rem;}
+.btn-p:hover{background:#22d0f0;}
+.btn-o{background:transparent;border:1px solid var(--w30);border-radius:10px;padding:13px 20px;font-size:var(--fzs);color:var(--w60);cursor:pointer;width:100%;margin-top:.6rem;}
+.btn-o:hover{border-color:var(--cy);color:var(--w);}
+
+/* PROG */
+.prog-wrap{padding:.85rem 1.5rem .2rem;max-width:640px;margin:0 auto;}
+.prog-bar{display:flex;gap:4px;}
+.ps{height:4px;border-radius:2px;flex:1;background:var(--w15);}
+.ps.done{background:var(--cy);}
+.ps.active{background:rgba(26,184,216,.4);}
+.prog-lbl{font-size:var(--fzxs);color:var(--w30);margin-top:4px;}
+
+/* GAME */
+.gw{padding:1.25rem 1.5rem;max-width:640px;margin:0 auto;}
+.scene-card{background:var(--w08);border-left:3px solid var(--cy);border-radius:0 8px 8px 0;padding:.85rem 1rem;margin-bottom:.85rem;}
+.scene-lbl{font-size:var(--fzxs);letter-spacing:.1em;text-transform:uppercase;color:var(--cy);margin-bottom:5px;}
+.scene-txt{font-size:var(--fzs);color:var(--w60);line-height:1.7;}
+.tension-card{background:var(--orb);border:1px solid rgba(232,66,10,.3);border-radius:8px;padding:.85rem 1rem;margin-bottom:.85rem;}
+.tension-lbl{font-size:var(--fzs);font-weight:500;color:var(--or2);margin-bottom:4px;}
+.tension-txt{font-size:var(--fzs);color:rgba(255,150,100,.9);line-height:1.65;}
+
+.ev-card{background:var(--w08);border:1px solid var(--w15);border-radius:10px;padding:1rem;margin-bottom:.75rem;}
+.ev-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.ev-icon{width:32px;height:32px;min-width:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.ev-title{font-size:var(--fzs);font-weight:500;color:var(--w);}
+.ev-meta{font-size:var(--fzxs);color:var(--w30);margin-top:2px;}
+.ev-body{font-size:var(--fzs);color:var(--w60);line-height:1.7;font-style:italic;}
+.ev-flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.ef{background:var(--w08);border:1px solid var(--w15);border-radius:6px;padding:5px 10px;font-size:var(--fzxs);color:var(--w60);cursor:pointer;}
+.ef:hover{border-color:var(--or);color:var(--or2);}
+.ef.on{background:var(--orb);border-color:var(--or);color:var(--or2);}
+
+.sus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:.85rem;}
+.sus-card{background:var(--w08);border:1px solid var(--w15);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;}
+.sus-card:hover{border-color:var(--am);}
+.sus-card.sel{border:2px solid var(--am);background:rgba(239,159,39,.08);}
+.sus-avatar{width:44px;height:44px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;}
+.sus-name{font-size:var(--fzs);font-weight:500;color:var(--w);}
+.sus-role{font-size:var(--fzxs);color:var(--w30);margin-top:2px;}
+.sus-motive{font-size:var(--fzxs);color:var(--w60);margin-top:8px;line-height:1.5;display:none;}
+.sus-card.sel .sus-motive{display:block;}
+
+.ta{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 14px;font-size:var(--fzs);color:var(--w);outline:none;width:100%;font-family:var(--font-sans);resize:vertical;min-height:88px;line-height:1.7;}
+.ta::placeholder{color:var(--w30);}
+.ta:focus{border-color:var(--cy);}
+
+.verd-card{background:var(--nv3);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.75rem;}
+.vtag{display:inline-block;border-radius:5px;padding:3px 10px;font-size:var(--fzxs);font-weight:500;margin-bottom:.5rem;}
+.vtag.ok{background:rgba(99,153,34,.2);color:#97C459;}
+.vtag.par{background:rgba(239,159,39,.2);color:var(--am);}
+.vtag.err{background:var(--orb);color:var(--or2);}
+.vtitle{font-size:var(--fzs);font-weight:500;color:var(--w);margin-bottom:6px;}
+.vtxt{font-size:var(--fzs);color:var(--w60);line-height:1.7;}
+.profile-card{background:var(--cy3);border:1px solid rgba(26,184,216,.25);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.75rem;}
+.pname{font-size:var(--fzs);font-weight:500;color:var(--cy);margin-bottom:3px;}
+.pdesc{font-size:var(--fzs);color:var(--w60);line-height:1.65;}
+.act-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:.65rem;}
+.act-num{width:22px;height:22px;min-width:22px;border-radius:50%;background:var(--cy);color:var(--nv);font-size:var(--fzxs);font-weight:500;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.act-txt{font-size:var(--fzs);color:var(--w60);line-height:1.6;}
+.divider{height:1px;background:var(--w15);margin:.85rem 0;}
+.share-row{display:flex;gap:8px;flex-wrap:wrap;}
+.share-btn{flex:1;min-width:130px;background:var(--w08);border:1px solid var(--w15);border-radius:8px;padding:.75rem;font-size:var(--fzxs);color:var(--w60);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;}
+.share-btn:hover{border-color:var(--cy);color:var(--w);}
+
+.sep{height:1px;background:var(--w15);}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+</style>
+
+<h2 class="sr-only">CSI Revvo — Temporada 2: A Inovação que Nunca Saiu da Gaveta. Game individual de liderança sobre ambientes de inovação.</h2>
+<div class="wrap" id="app"></div>
+
+<script>
+const W=window;
+W._n='';W._a='';W._flags={};W._sus='';W._laudo='';W._acoes='';
+
+const LOGO=`<svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+  <circle cx="19" cy="8" r="5" fill="#1AB8D8" opacity=".9"/>
+  <path d="M10 34 Q19 18 28 34" stroke="#1AB8D8" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M17 24 L24 17 L27 21" stroke="#E8420A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 17 L24 22 M24 17 L19 17" stroke="#E8420A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>`;
+
+const HERO_HTML=()=>`<div class="hero">
+  <div class="logo-row">
+    ${LOGO}
+    <div style="flex:1;min-width:0;">
+      <div class="logo-text-top">Jeito Revvo de Liderar · Temporada 2</div>
+      <div class="logo-text-main">Liderança que proporciona <span>ambientes de inovação</span></div>
+    </div>
+    <div class="agent-pill">RevvoAgente: ${W._n||'?'}</div>
+  </div>
+  <div class="hero-case"><div class="case-pill">CASO #02 · CONFIDENCIAL</div></div>
+  <div class="hero-title">A inovação que <em>nunca saiu da gaveta</em></div>
+  <div class="hero-sub">Uma ideia surgiu. Tinha potencial. Morreu antes de virar ação. Investigue por quê.</div>
+</div><div class="sep"></div>`;
+
+const PROG=(s)=>{
+  let h=`<div class="prog-wrap"><div class="prog-bar">`;
+  for(let i=0;i<5;i++) h+=`<div class="ps ${i<s?'done':i===s?'active':''}"></div>`;
+  return h+`</div><div class="prog-lbl">etapa ${s+1} de 5</div></div>`;
+};
+
+const EVS=[
+  {id:'e1',icon:'ti-message-circle',c:'#1AB8D8',bg:'rgba(26,184,216,.18)',
+   title:'Mensagem no Teams',meta:'Marina, Analista de Produto — 3 semanas atrás',
+   body:'"Oi, tenho uma ideia pra apresentar na reunião de quinta. Acho que dá pra simplificar o fluxo de onboarding dos clientes — reduziria o tempo de ativação em 30%. Posso ter 10 minutos na pauta?"',
+   flags:['ideia concreta com dado','iniciativa própria','pediu espaço formalmente']},
+  {id:'e2',icon:'ti-calendar',c:'#EF9F27',bg:'rgba(239,159,39,.18)',
+   title:'Ata da reunião de quinta',meta:'Reunião semanal · 73 minutos de duração',
+   body:'Pauta coberta: métricas (22min), bugs da sprint (31min), alinhamento NPS (15min). Tempo restante: 5 minutos. Sem espaço para novos itens. Marina presente — não falou.',
+   flags:['pauta fechada','sem margem para inovação','Marina silenciada']},
+  {id:'e3',icon:'ti-message',c:'#EF9F27',bg:'rgba(239,159,39,.18)',
+   title:'Resposta do RevvoLíder no Teams',meta:'2 horas após a mensagem de Marina',
+   body:'"Marina, ótimo que você está pensando nisso! A pauta de quinta está bem cheia, mas traz por escrito que eu leio com calma. Se fizer sentido, encaixamos numa próxima."',
+   flags:['adiamento sem data','esforço delegado a Marina','sem comprometimento real']},
+  {id:'e4',icon:'ti-file-text',c:'#5DCAA5',bg:'rgba(29,158,117,.18)',
+   title:'Documento enviado por Marina',meta:'Google Doc · 3 páginas — 4 dias depois',
+   body:'Marina escreveu análise do problema, proposta, estimativa de impacto e referências de outras empresas. Visualizações: 1 (o próprio autor). Nenhum comentário recebido.',
+   flags:['esforço alto ignorado','nenhum feedback do líder','documento nunca discutido']},
+  {id:'e5',icon:'ti-user-x',c:'#E8420A',bg:'rgba(232,66,10,.18)',
+   title:'1:1 com Marina — 2 semanas depois',meta:'Anotação do RevvoLíder',
+   body:'"Marina bem, entregando bem na sprint. Perguntei sobre a ideia do onboarding — ela disse \'tudo bem, foi só uma ideia\'. Tom resignado. Não aprofundei."',
+   flags:['resignação visível','líder não investigou','oportunidade perdida']},
+  {id:'e6',icon:'ti-alert-circle',c:'#E8420A',bg:'rgba(232,66,10,.18)',
+   title:'Pesquisa de clima — resposta anônima',meta:'Pergunta: "Você se sente encorajado a trazer novas ideias?"',
+   body:'"Quando trago ideias, a resposta é sempre \'anota aí e a gente vê depois\'. Depois nunca vem. Parei de trazer."',
+   flags:['padrão recorrente','não é só Marina','cultura de silêncio se formando']},
+];
+
+const SUSPECTS=[
+  {id:'s1',name:'O RevvoLíder',role:'Intenção boa, impacto ruim',c:'#1AB8D8',bg:'rgba(26,184,216,.18)',
+   motive:'Nunca criou estrutura para inovação. Reagiu à ideia como mais um item de agenda — e a agenda já estava cheia.'},
+  {id:'s2',name:'A Reunião',role:'O processo sem margem',c:'#EF9F27',bg:'rgba(239,159,39,.18)',
+   motive:'Pauta sempre cheia, 73 min sem margem. Mas quem define a pauta é o líder — a reunião não se agenda sozinha.'},
+  {id:'s3',name:'Marina',role:'A analista',c:'#5DCAA5',bg:'rgba(29,158,117,.18)',
+   motive:'Desistiu rápido demais? Ou aprendeu com o histórico que desistir é racional? Ela fez tudo certo.'},
+  {id:'s4',name:'A Cultura',role:'O ambiente',c:'#E8420A',bg:'rgba(232,66,10,.18)',
+   motive:'Cultura silencia ideias — mas é produto de comportamentos repetidos do líder. Não existe por acaso.'},
+];
+
+const VERD={
+  s1:{tag:'par',tl:'quase lá — correto, mas incompleto',title:'O RevvoLíder é o centro — mas o sistema todo falhou.',
+    txt:'Correto que o líder é o ponto crítico. Mas reduzi-lo ao "culpado" esconde o diagnóstico real: ele não construiu estrutura, o que permitiu que a reunião, a cultura e o silêncio de Marina se consolidassem juntos. Um responsável individual não muda um sistema. O ambiente precisa ser redesenhado — e quem faz isso é o líder.'},
+  s2:{tag:'par',tl:'parcialmente correto',title:'A reunião contribuiu — mas não é a causa raiz.',
+    txt:'A pauta cheia é sintoma. Quem decide o que entra na pauta é o líder. Reformar a reunião sem mudar a postura de quem a conduz muda a forma, não o resultado. A inovação não morreu porque o slot estava cheio — morreu porque nunca foi tratada como prioridade.'},
+  s3:{tag:'err',tl:'diagnóstico incorreto',title:'Marina não é suspeita — é vítima do ambiente.',
+    txt:'Culpar Marina por ter desistido é o mesmo que culpar quem pede demissão por "não ter lutado mais". Ela fez tudo certo: trouxe a ideia com dado, formalizou, escreveu 3 páginas. O ambiente respondeu com silêncio. A resignação dela é dado diagnóstico — não falha pessoal.'},
+  s4:{tag:'par',tl:'visão sistêmica — boa, mas incompleta',title:'A cultura é o cenário. O líder é o diretor.',
+    txt:'Correto que a cultura silencia ideias. Mas cultura não se forma sozinha — é produto de comportamentos do líder acumulados ao longo do tempo. Apontar "a cultura" sem nomear quem a constrói é o caminho mais seguro para não mudar nada.'},
+};
+
+const PROFILES={
+  alto:{name:'RevvoAgente de alta acuidade',
+    desc:'Você identificou o padrão sistêmico: não é um culpado isolado, é um ambiente construído por escolhas de liderança repetidas. Você está pronto para redesenhar esse ambiente no seu time.',
+    actions:['Reserve 15 minutos fixos em toda reunião semanal para "ideias abertas" — sem julgamento, sem decisão imediata.','Quando alguém trouxer uma ideia, responda com data: "vou ler até quarta e te dou retorno na quinta."','No próximo 1:1, pergunte: "tem alguma ideia que você deixou de trazer? Por quê?"']},
+  medio:{name:'RevvoAgente em desenvolvimento',
+    desc:'Você identificou parte do problema. A tendência é focar no elemento mais visível sem ver como os fatores se retroalimentam. O diagnóstico completo exige olhar para o sistema.',
+    actions:['Liste as últimas 3 ideias que seu time trouxe. O que aconteceu com cada uma?','Observe se suas reuniões têm margem para o inesperado — ou se estão pautadas até o fim.','Pergunte a um liderado de confiança: você se sente à vontade para trazer ideias pra mim?']},
+  baixo:{name:'RevvoAgente iniciante',
+    desc:'Você apontou para um elemento isolado. O diagnóstico de ambiente de inovação é sempre sistêmico. Nenhum culpado sozinho explica — e nenhuma solução pontual resolve.',
+    actions:['Releia as 6 evidências perguntando: o que o RevvoLíder poderia ter feito diferente em cada momento?','Converse com alguém do seu time sobre o que tornaria mais fácil trazer ideias para você.','No workshop, traga este caso como ponto de reflexão pessoal.']},
+};
+
+function r(html){document.getElementById('app').innerHTML=html;}
+
+function showEnvelope(){
+  r(`<div class="env-wrap">
+    <div class="env-eyebrow"><i class="ti ti-lock" aria-hidden="true" style="margin-right:5px;"></i>documento confidencial — para o RevvoAgente</div>
+    <div class="env-outer" id="env-outer" onclick="animateOpen()">
+      <svg class="env-svg" viewBox="0 0 340 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="40" width="338" height="179" rx="6" fill="#162848" stroke="#1AB8D8" stroke-width="1.5"/>
+        <path d="M1 40 L170 130 L339 40" stroke="#1AB8D8" stroke-width="1.2"/>
+        <path d="M1 219 L110 130" stroke="#0D8FAA" stroke-width="1"/>
+        <path d="M339 219 L230 130" stroke="#0D8FAA" stroke-width="1"/>
+        <rect x="275" y="50" width="48" height="36" rx="3" fill="rgba(232,66,10,.18)" stroke="#E8420A" stroke-width="1"/>
+        <text x="299" y="71" text-anchor="middle" font-family="Arial" font-size="9" fill="#FF6B35" font-weight="bold">CSI</text>
+        <text x="170" y="155" text-anchor="middle" font-family="Arial" font-size="13" fill="white" font-weight="500">RevvoAgente</text>
+        <text x="170" y="173" text-anchor="middle" font-family="Arial" font-size="11" fill="#1AB8D8">Jeito Revvo de Liderar · T2</text>
+        <text x="170" y="193" text-anchor="middle" font-family="Arial" font-size="10" fill="rgba(255,255,255,.4)">Caso #02 · Confidencial</text>
+        <g id="flap" style="transform-origin:170px 40px;transform:rotateX(0deg);transition:transform .55s cubic-bezier(.4,0,.2,1);">
+          <path d="M1 40 L170 128 L339 40 L1 40Z" fill="#1C3358" stroke="#1AB8D8" stroke-width="1.5" stroke-linejoin="round"/>
+        </g>
+        <g id="letter" style="opacity:0;transform:translateY(0px);transition:opacity .4s ease .35s,transform .55s ease .35s;">
+          <rect x="90" y="15" width="160" height="110" rx="4" fill="white" opacity=".95"/>
+          <rect x="90" y="15" width="160" height="18" rx="4" fill="#0B1628"/>
+          <text x="170" y="27" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1AB8D8" font-weight="bold" letter-spacing="1">CONFIDENCIAL · CSI REVVO</text>
+          <text x="170" y="50" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1A2B3C">RevvoAgente,</text>
+          <text x="170" y="65" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">Uma ideia surgiu. Era boa.</text>
+          <text x="170" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E8420A" font-weight="bold">Três semanas depois, estava morta.</text>
+          <text x="170" y="92" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">O que a matou?</text>
+          <text x="170" y="105" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">Essa é a sua missão.</text>
+          <line x1="110" y1="117" x2="230" y2="117" stroke="#C5D0E0" stroke-width="0.8"/>
+          <text x="170" y="126" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#7A9ABB">Central de Investigação Revvo</text>
+        </g>
+      </svg>
+    </div>
+    <div class="env-hint"><i class="ti ti-hand-click" aria-hidden="true" style="margin-right:4px;font-size:16px;"></i>clique no envelope para abrir</div>
+    <button class="env-btn" onclick="animateOpen()">abrir o envelope</button>
+  </div>`);
+}
+
+function animateOpen(){
+  const flap=document.getElementById('flap');
+  const letter=document.getElementById('letter');
+  if(!flap||!letter)return;
+  flap.style.transform='rotateX(180deg)';
+  letter.style.opacity='1';
+  letter.style.transform='translateY(-55px)';
+  setTimeout(()=>showCarta(),900);
+}
+
+function showCarta(){
+  r(`<div class="carta-wrap">
+    <div class="carta-paper">
+      <div class="carta-top">
+        <div style="display:flex;align-items:center;gap:10px;">
+          ${LOGO}
+          <div>
+            <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);">Jeito Revvo de Liderar</div>
+            <div style="font-size:14px;font-weight:500;color:#fff;">Central de Investigação · CSI</div>
+          </div>
+        </div>
+        <div class="carta-classify">CONFIDENCIAL</div>
+      </div>
+      <div class="carta-body">
+        <p>RevvoAgente,</p>
+        <p>Você foi selecionado para investigar um caso que acontece com mais frequência do que gostaríamos de admitir dentro das nossas organizações. Um caso sem crime intencional, sem conflito declarado, sem nenhum vilão óbvio.</p>
+        <p>Uma ideia surgiu. Era boa. Tinha dados, tinha proposta, tinha uma pessoa disposta a executar. <span class="hl-or">Três semanas depois, essa ideia estava morta</span> — sem decisão, sem feedback, sem nem ter sido discutida.</p>
+        <p>O que a matou? <span class="hl">Essa é a sua missão.</span></p>
+        <p>Você vai analisar 6 evidências, identificar o principal responsável, escrever o laudo e receber seu perfil de investigação com ações concretas para a próxima semana.</p>
+        <p style="font-weight:500;color:#fff;">O caso não tem resposta certa — tem consequência real.</p>
+      </div>
+      <div class="carta-ass">
+        <div style="font-size:14px;font-weight:500;color:#fff;">Central de Investigação Revvo</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.3);margin-top:2px;">Jeito Revvo de Liderar · Temporada 2 · Inovação</div>
+      </div>
+    </div>
+    <div class="qr-box">
+      <div class="qr-ph"><i class="ti ti-qrcode" aria-hidden="true" style="font-size:30px;color:rgba(255,255,255,.3);"></i></div>
+      <div>
+        <div class="qr-txt">Acesse pelo QR code na carta física ou pelo link:</div>
+        <div class="qr-url">revvogg.github.io/csi-inovacao-t2</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;">Tempo estimado: 20 a 30 minutos</div>
+      </div>
+    </div>
+    <button class="btn-p" onclick="showId()">aceitar a missão e iniciar investigação <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
+  </div>`);
+}
+
+function showId(){
+  r(`<div class="id-wrap">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;">
+      ${LOGO}
+      <div>
+        <div style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;">Jeito Revvo de Liderar · T2</div>
+        <div style="font-size:16px;font-weight:500;color:#fff;">Identificação do RevvoAgente</div>
+      </div>
+    </div>
+    <div style="margin-bottom:.85rem;">
+      <div class="lbl">nome</div>
+      <input class="inp" id="i-n" placeholder="Como te chamam na Revvo?"/>
+    </div>
+    <div style="margin-bottom:.85rem;">
+      <div class="lbl">área</div>
+      <select class="sel" id="i-a">
+        <option value="">Selecione...</option>
+        <option>Produto</option><option>Tecnologia</option><option>Comercial</option>
+        <option>Operações</option><option>Gente & Gestão</option><option>Conteúdo & Design</option>
+        <option>Customer Experience</option><option>Financeiro</option><option>Outra</option>
+      </select>
+    </div>
+    <div class="info-box" style="margin-bottom:.85rem;">
+      <div style="font-size:13px;color:#1AB8D8;margin-bottom:5px;"><i class="ti ti-info-circle" aria-hidden="true" style="margin-right:4px;"></i>sobre o caso</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Você vai analisar 6 evidências, marcar padrões, apontar o principal responsável, escrever o laudo e receber seu perfil de investigação com 3 ações concretas.</div>
+    </div>
+    <button class="btn-p" onclick="startGame()">entrar na cena do crime <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
+  </div>`);
+}
+
+function startGame(){
+  const n=document.getElementById('i-n').value.trim();
+  const a=document.getElementById('i-a').value;
+  if(!n||!a){alert('Preencha seu nome e área antes de continuar.');return;}
+  W._n=n;W._a=a;showEvidencias();
+}
+
+function showEvidencias(){
+  let evs='';
+  EVS.forEach(e=>{
+    const flags=e.flags.map(f=>{
+      const on=W._flags[e.id]&&W._flags[e.id].includes(f)?'on':'';
+      return `<span class="ef ${on}" onclick="toggleFlag('${e.id}','${f}',this)">${f}</span>`;
+    }).join('');
+    evs+=`<div class="ev-card">
+      <div class="ev-head">
+        <div class="ev-icon" style="background:${e.bg};"><i class="ti ${e.icon}" aria-hidden="true" style="font-size:17px;color:${e.c};"></i></div>
+        <div><div class="ev-title">${e.title}</div><div class="ev-meta">${e.meta}</div></div>
+      </div>
+      <div class="ev-body">${e.body}</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:8px;">marque o que chama atenção:</div>
+      <div class="ev-flags">${flags}</div>
+    </div>`;
+  });
+  r(HERO_HTML()+PROG(0)+`<div class="gw">
+    <div class="scene-card"><div class="scene-lbl"><i class="ti ti-file-search" aria-hidden="true" style="margin-right:4px;"></i>6 evidências para analisar</div>
+    <div class="scene-txt">Leia cada peça com atenção. Marque os padrões que identificar — eles vão compor o seu laudo.</div></div>
+    ${evs}
+    <button class="btn-p" onclick="showSuspeitos()">avançar para os suspeitos <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
+  </div>`);
+}
+
+function toggleFlag(eid,flag,el){
+  if(!W._flags[eid])W._flags[eid]=[];
+  const i=W._flags[eid].indexOf(flag);
+  if(i>=0){W._flags[eid].splice(i,1);el.classList.remove('on');}
+  else{W._flags[eid].push(flag);el.classList.add('on');}
+}
+
+function showSuspeitos(){
+  const cards=SUSPECTS.map(s=>`
+    <div class="sus-card ${W._sus===s.id?'sel':''}" id="sc-${s.id}" onclick="pickSus('${s.id}')">
+      <div class="sus-avatar" style="background:${s.bg};color:${s.c};">${s.name[0]}</div>
+      <div class="sus-name">${s.name}</div>
+      <div class="sus-role">${s.role}</div>
+      <div class="sus-motive">${s.motive}</div>
+    </div>`).join('');
+  r(HERO_HTML()+PROG(1)+`<div class="gw">
+    <div class="tension-card"><div class="tension-lbl"><i class="ti ti-alert-triangle" aria-hidden="true" style="margin-right:5px;"></i>quem matou a inovação?</div>
+    <div class="tension-txt">Com base nas evidências, selecione o principal responsável. Clique no suspeito para ver o motivo antes de confirmar.</div></div>
+    <div class="sus-grid">${cards}</div>
+    <button class="btn-p" id="btn-sus" ${W._sus?'':'disabled'} style="${W._sus?'':'opacity:.4;cursor:not-allowed;'}" onclick="showLaudo()">confirmar e escrever laudo <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
+  </div>`);
+}
+
+function pickSus(id){
+  W._sus=id;
+  SUSPECTS.forEach(s=>{const el=document.getElementById('sc-'+s.id);if(el)el.className='sus-card'+(id===s.id?' sel':'');});
+  const btn=document.getElementById('btn-sus');
+  if(btn){btn.disabled=false;btn.style.opacity='1';btn.style.cursor='pointer';}
+}
+
+function showLaudo(){
+  r(HERO_HTML()+PROG(2)+`<div class="gw">
+    <div class="scene-card"><div class="scene-lbl"><i class="ti ti-file-pencil" aria-hidden="true" style="margin-right:4px;"></i>escreva o laudo</div>
+    <div class="scene-txt">Com base nas evidências marcadas e no suspeito identificado, escreva suas conclusões. O laudo revela como você lê os dados — não há resposta certa, há diagnóstico mais ou menos completo.</div></div>
+    <div style="margin-bottom:.85rem;">
+      <div class="lbl">o que matou essa inovação?</div>
+      <textarea class="ta" id="t-l" placeholder="Descreva o mecanismo: o que aconteceu, em que ordem, com que impacto?">${W._laudo}</textarea>
+    </div>
+    <div style="margin-bottom:.85rem;">
+      <div class="lbl">o que o RevvoLíder poderia ter feito diferente?</div>
+      <textarea class="ta" id="t-a" placeholder="Liste 2 ou 3 comportamentos concretos que teriam mudado o desfecho.">${W._acoes}</textarea>
+    </div>
+    <button class="btn-p" onclick="submitLaudo()">enviar laudo e ver veredicto <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
+  </div>`);
+}
+
+function submitLaudo(){
+  const l=document.getElementById('t-l').value.trim();
+  const a=document.getElementById('t-a').value.trim();
+  if(!l||!a){alert('Preencha os dois campos antes de continuar.');return;}
+  W._laudo=l;W._acoes=a;showVeredicto();
+}
+
+function showVeredicto(){
+  const v=VERD[W._sus]||VERD['s4'];
+  const sus=SUSPECTS.find(s=>s.id===W._sus);
+  const fc=Object.values(W._flags).reduce((s,a)=>s+a.length,0);
+  const pk=fc>=10?'alto':fc>=5?'medio':'baixo';
+  const p=PROFILES[pk];
+  r(HERO_HTML()+PROG(3)+`<div class="gw">
+    <div class="lbl" style="margin-bottom:.75rem;"><i class="ti ti-gavel" aria-hidden="true" style="margin-right:4px;"></i>veredicto</div>
+    <div class="verd-card">
+      <div class="vtag ${v.tag}">${v.tl}</div>
+      <div class="vtitle">${v.title}</div>
+      <div class="vtxt">${v.txt}</div>
+    </div>
+    <div class="verd-card" style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:40px;height:40px;min-width:40px;border-radius:50%;background:${sus.bg};display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;color:${sus.c};">${sus.name[0]}</div>
+      <div><div style="font-size:14px;font-weight:500;color:#fff;margin-bottom:4px;">${sus.name}</div><div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;">${sus.motive}</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="lbl" style="margin-bottom:.65rem;">seu perfil de investigação</div>
+    <div class="profile-card">
+      <div class="pname">${p.name}</div>
+      <div style="font-size:12px;color:#0D8FAA;margin-bottom:6px;">${fc} padrões identificados nas evidências</div>
+      <div class="pdesc">${p.desc}</div>
+    </div>
+    <div class="lbl" style="margin-bottom:.65rem;">3 ações para a próxima semana</div>
+    ${p.actions.map((a,i)=>`<div class="act-row"><div class="act-num">${i+1}</div><div class="act-txt">${a}</div></div>`).join('')}
+    <div class="divider"></div>
+    <div class="share-row">
+      <button class="share-btn" onclick="sendPrompt('Meu laudo no CSI Revvo T2: suspeito=${sus.name}. Laudo: ${W._laudo.substring(0,100)}... Quero aprofundar esse diagnóstico sobre ambiente de inovação.')"><i class="ti ti-messages" aria-hidden="true" style="font-size:14px;"></i>aprofundar diagnóstico ↗</button>
+      <button class="share-btn" onclick="sendPrompt('Com base no perfil ${p.name}, me ajuda a criar um plano de 30 dias para mudar o ambiente de inovação do meu time.')"><i class="ti ti-checklist" aria-hidden="true" style="font-size:14px;"></i>plano de 30 dias ↗</button>
+    </div>
+    <button class="btn-o" onclick="restart()" style="margin-top:.5rem;"><i class="ti ti-refresh" aria-hidden="true" style="margin-right:5px;"></i>reiniciar investigação</button>
+  </div>`);
+}
+
+function restart(){W._n='';W._a='';W._flags={};W._sus='';W._laudo='';W._acoes='';showEnvelope();}
+showEnvelope();
+</script>
