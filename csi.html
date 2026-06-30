@@ -5,157 +5,152 @@
   --nv:#0B1628;--nv2:#0F1E38;--nv3:#162848;--nv4:#1C3358;
   --cy:#1AB8D8;--cy2:#0D8FAA;--cy3:rgba(26,184,216,.15);
   --or:#E8420A;--or2:#FF6B35;--orb:rgba(232,66,10,.12);
-  --am:#EF9F27;
-  --w:#fff;--w80:rgba(255,255,255,.8);--w60:rgba(255,255,255,.6);
+  --am:#EF9F27;--w:#fff;--w80:rgba(255,255,255,.8);--w60:rgba(255,255,255,.6);
   --w30:rgba(255,255,255,.3);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08);
-  --fz:16px;--fzs:14px;--fzxs:12px;
 }
 body{margin:0;padding:0;}
 .wrap{background:var(--nv);min-height:100vh;font-family:var(--font-sans);width:100%;}
 
 /* ENVELOPE */
 .env-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background:var(--nv2);}
-.env-eyebrow{font-size:var(--fzxs);letter-spacing:.18em;text-transform:uppercase;color:var(--cy);margin-bottom:2rem;text-align:center;}
-.env-outer{width:min(340px,90vw);cursor:pointer;position:relative;}
-.env-svg{width:100%;display:block;}
-.env-flap-anim{transform-origin:top center;transition:transform .5s cubic-bezier(.4,0,.2,1);}
-.env-flap-anim.open{transform:rotateX(180deg);}
-.env-letter{opacity:0;transform:translateY(0);transition:opacity .4s ease .3s, transform .5s ease .3s;}
-.env-letter.out{opacity:1;transform:translateY(-60px);}
-.env-hint{font-size:var(--fzs);color:var(--w30);margin-top:1.5rem;text-align:center;}
-.env-btn{margin-top:1.5rem;background:var(--cy);border:none;border-radius:10px;padding:14px 40px;font-size:var(--fz);font-weight:500;color:var(--nv);cursor:pointer;width:min(340px,90vw);}
+.env-eyebrow{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--cy);margin-bottom:1.75rem;text-align:center;}
+.env-outer{width:min(360px,92vw);position:relative;margin-bottom:1.25rem;}
+.env-hint{font-size:14px;color:var(--w30);margin-top:1.25rem;text-align:center;}
+.env-btn{margin-top:1.25rem;background:var(--cy);border:none;border-radius:10px;padding:14px 40px;font-size:16px;font-weight:500;color:var(--nv);cursor:pointer;width:min(360px,92vw);}
 .env-btn:hover{background:#22d0f0;}
 
 /* CARTA */
-.carta-wrap{padding:1.5rem;max-width:640px;margin:0 auto;}
+.carta-wrap{padding:1.5rem;max-width:660px;margin:0 auto;}
 .carta-paper{background:var(--nv3);border:1px solid var(--w15);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;}
-.carta-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:1.1rem;border-bottom:1px solid var(--w15);gap:12px;flex-wrap:wrap;}
-.carta-classify{background:var(--orb);border:1px solid var(--or);border-radius:5px;padding:4px 12px;font-size:var(--fzxs);letter-spacing:.1em;color:var(--or2);font-weight:500;white-space:nowrap;}
-.carta-body{font-size:var(--fzs);color:var(--w80);line-height:1.8;}
+.carta-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:1px solid var(--w15);gap:12px;flex-wrap:wrap;}
+.carta-classify{background:var(--orb);border:1px solid var(--or);border-radius:5px;padding:4px 12px;font-size:12px;letter-spacing:.1em;color:var(--or2);font-weight:500;white-space:nowrap;}
+.carta-body{font-size:15px;color:var(--w80);line-height:1.8;}
 .carta-body p{margin-bottom:1rem;}
-.carta-body .hl{color:var(--cy);font-weight:500;}
-.carta-body .hl-or{color:var(--or2);font-weight:500;}
-.carta-ass{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--w15);}
+.hl{color:var(--cy);font-weight:500;}
+.hl-or{color:var(--or2);font-weight:500;}
+.carta-ass{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--w15);}
 .qr-box{background:var(--nv4);border:1px dashed var(--cy2);border-radius:10px;padding:1.1rem;display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;}
 .qr-ph{width:68px;height:68px;min-width:68px;background:var(--w08);border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.qr-txt{font-size:var(--fzs);color:var(--w60);line-height:1.6;}
-.qr-url{font-size:var(--fzxs);color:var(--cy);margin-top:4px;word-break:break-all;}
+.qr-txt{font-size:14px;color:var(--w60);line-height:1.6;}
+.qr-url{font-size:12px;color:var(--cy);margin-top:4px;word-break:break-all;}
 
 /* HERO */
-.hero{background:var(--nv2);padding:1.1rem 1.5rem;border-bottom:1px solid var(--w15);}
-.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:.65rem;}
-.logo-text-top{font-size:var(--fzxs);letter-spacing:.12em;text-transform:uppercase;color:var(--w30);}
-.logo-text-main{font-size:var(--fzs);font-weight:500;color:var(--w);}
-.logo-text-main span{color:var(--cy);}
-.hero-case{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
-.case-pill{background:var(--orb);border:1px solid var(--or);border-radius:5px;padding:3px 10px;font-size:var(--fzxs);color:var(--or2);font-weight:500;letter-spacing:.06em;}
-.hero-title{font-size:clamp(18px,4vw,22px);font-weight:500;color:var(--w);line-height:1.25;margin-bottom:3px;}
+.hero{background:var(--nv2);padding:1rem 1.5rem;border-bottom:1px solid var(--w15);}
+.logo-row{display:flex;align-items:center;gap:8px;margin-bottom:.6rem;}
+.hero-logo{width:52px;height:42px;object-fit:contain;flex-shrink:0;}
+.logo-txt-top{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--w30);}
+.logo-txt-main{font-size:13px;font-weight:500;color:var(--w);}
+.logo-txt-main span{color:var(--cy);}
+.agent-pill{background:var(--w08);border:1px solid var(--w30);border-radius:20px;padding:3px 10px;font-size:11px;color:var(--w60);margin-left:auto;white-space:nowrap;}
+.hero-case-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.case-pill{background:var(--orb);border:1px solid var(--or);border-radius:5px;padding:3px 10px;font-size:11px;color:var(--or2);font-weight:500;letter-spacing:.06em;}
+.hero-title{font-size:clamp(17px,4vw,22px);font-weight:500;color:var(--w);line-height:1.25;margin-bottom:3px;}
 .hero-title em{color:var(--cy);font-style:normal;}
-.hero-sub{font-size:var(--fzs);color:var(--w60);}
-.agent-pill{background:var(--w08);border:1px solid var(--w30);border-radius:20px;padding:3px 10px;font-size:var(--fzxs);color:var(--w60);margin-left:auto;white-space:nowrap;}
+.hero-sub{font-size:13px;color:var(--w60);}
+.sep{height:1px;background:var(--w15);}
 
-/* ID SCREEN */
+/* ID */
 .id-wrap{padding:1.5rem;max-width:560px;margin:0 auto;}
-.lbl{font-size:var(--fzxs);letter-spacing:.12em;text-transform:uppercase;color:var(--w30);margin-bottom:.4rem;}
-.inp{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 16px;font-size:var(--fz);color:var(--w);outline:none;width:100%;font-family:var(--font-sans);}
+.lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--w30);margin-bottom:.4rem;}
+.inp{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 16px;font-size:16px;color:var(--w);outline:none;width:100%;font-family:var(--font-sans);}
 .inp::placeholder{color:var(--w30);}
 .inp:focus{border-color:var(--cy);}
-.sel{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 16px;font-size:var(--fz);color:var(--w);outline:none;width:100%;font-family:var(--font-sans);}
+.sel{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 16px;font-size:16px;color:var(--w);outline:none;width:100%;font-family:var(--font-sans);}
 .sel option{background:#1a2a45;}
 .info-box{background:var(--w08);border:1px solid var(--w15);border-radius:10px;padding:1rem;}
-.btn-p{background:var(--cy);border:none;border-radius:10px;padding:14px 24px;font-size:var(--fz);font-weight:500;color:var(--nv);cursor:pointer;width:100%;margin-top:.85rem;}
+.btn-p{background:var(--cy);border:none;border-radius:10px;padding:14px 24px;font-size:16px;font-weight:500;color:var(--nv);cursor:pointer;width:100%;margin-top:.85rem;}
 .btn-p:hover{background:#22d0f0;}
-.btn-o{background:transparent;border:1px solid var(--w30);border-radius:10px;padding:13px 20px;font-size:var(--fzs);color:var(--w60);cursor:pointer;width:100%;margin-top:.6rem;}
+.btn-o{background:transparent;border:1px solid var(--w30);border-radius:10px;padding:13px 20px;font-size:14px;color:var(--w60);cursor:pointer;width:100%;margin-top:.6rem;}
 .btn-o:hover{border-color:var(--cy);color:var(--w);}
 
 /* PROG */
-.prog-wrap{padding:.85rem 1.5rem .2rem;max-width:640px;margin:0 auto;}
+.prog-wrap{padding:.75rem 1.5rem .1rem;max-width:660px;margin:0 auto;}
 .prog-bar{display:flex;gap:4px;}
 .ps{height:4px;border-radius:2px;flex:1;background:var(--w15);}
 .ps.done{background:var(--cy);}
 .ps.active{background:rgba(26,184,216,.4);}
-.prog-lbl{font-size:var(--fzxs);color:var(--w30);margin-top:4px;}
+.prog-lbl{font-size:11px;color:var(--w30);margin-top:4px;}
 
 /* GAME */
-.gw{padding:1.25rem 1.5rem;max-width:640px;margin:0 auto;}
-.scene-card{background:var(--w08);border-left:3px solid var(--cy);border-radius:0 8px 8px 0;padding:.85rem 1rem;margin-bottom:.85rem;}
-.scene-lbl{font-size:var(--fzxs);letter-spacing:.1em;text-transform:uppercase;color:var(--cy);margin-bottom:5px;}
-.scene-txt{font-size:var(--fzs);color:var(--w60);line-height:1.7;}
-.tension-card{background:var(--orb);border:1px solid rgba(232,66,10,.3);border-radius:8px;padding:.85rem 1rem;margin-bottom:.85rem;}
-.tension-lbl{font-size:var(--fzs);font-weight:500;color:var(--or2);margin-bottom:4px;}
-.tension-txt{font-size:var(--fzs);color:rgba(255,150,100,.9);line-height:1.65;}
+.gw{padding:1.1rem 1.5rem;max-width:660px;margin:0 auto;}
+.scene-card{background:var(--w08);border-left:3px solid var(--cy);border-radius:0 8px 8px 0;padding:.85rem 1rem;margin-bottom:.75rem;}
+.scene-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cy);margin-bottom:5px;}
+.scene-txt{font-size:15px;color:var(--w60);line-height:1.7;}
+.tension-card{background:var(--orb);border:1px solid rgba(232,66,10,.3);border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;}
+.tension-lbl{font-size:15px;font-weight:500;color:var(--or2);margin-bottom:4px;}
+.tension-txt{font-size:15px;color:rgba(255,150,100,.9);line-height:1.65;}
 
+/* EVIDENCIAS */
 .ev-card{background:var(--w08);border:1px solid var(--w15);border-radius:10px;padding:1rem;margin-bottom:.75rem;}
 .ev-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;}
-.ev-icon{width:32px;height:32px;min-width:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.ev-title{font-size:var(--fzs);font-weight:500;color:var(--w);}
-.ev-meta{font-size:var(--fzxs);color:var(--w30);margin-top:2px;}
-.ev-body{font-size:var(--fzs);color:var(--w60);line-height:1.7;font-style:italic;}
-.ev-flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
-.ef{background:var(--w08);border:1px solid var(--w15);border-radius:6px;padding:5px 10px;font-size:var(--fzxs);color:var(--w60);cursor:pointer;}
+.ev-num{width:32px;height:32px;min-width:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--nv3);border:1px solid var(--cy2);font-size:14px;font-weight:500;color:var(--cy);}
+.ev-title{font-size:15px;font-weight:500;color:var(--w);}
+.ev-meta{font-size:12px;color:var(--w30);margin-top:2px;}
+.ev-body{font-size:14px;color:var(--w60);line-height:1.7;font-style:italic;margin-bottom:8px;}
+.ev-flags-lbl{font-size:11px;color:var(--w30);margin-bottom:5px;}
+.ev-flags{display:flex;gap:6px;flex-wrap:wrap;}
+.ef{background:var(--w08);border:1px solid var(--w15);border-radius:6px;padding:6px 12px;font-size:13px;color:var(--w60);cursor:pointer;transition:all .15s;}
 .ef:hover{border-color:var(--or);color:var(--or2);}
 .ef.on{background:var(--orb);border-color:var(--or);color:var(--or2);}
 
+/* SUSPEITOS */
 .sus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:.85rem;}
-.sus-card{background:var(--w08);border:1px solid var(--w15);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;}
+.sus-card{background:var(--w08);border:1px solid var(--w15);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;transition:border-color .15s;}
 .sus-card:hover{border-color:var(--am);}
 .sus-card.sel{border:2px solid var(--am);background:rgba(239,159,39,.08);}
 .sus-avatar{width:44px;height:44px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;}
-.sus-name{font-size:var(--fzs);font-weight:500;color:var(--w);}
-.sus-role{font-size:var(--fzxs);color:var(--w30);margin-top:2px;}
-.sus-motive{font-size:var(--fzxs);color:var(--w60);margin-top:8px;line-height:1.5;display:none;}
+.sus-name{font-size:14px;font-weight:500;color:var(--w);}
+.sus-role{font-size:12px;color:var(--w30);margin-top:2px;}
+.sus-motive{font-size:13px;color:var(--w60);margin-top:8px;line-height:1.5;display:none;text-align:left;}
 .sus-card.sel .sus-motive{display:block;}
 
-.ta{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 14px;font-size:var(--fzs);color:var(--w);outline:none;width:100%;font-family:var(--font-sans);resize:vertical;min-height:88px;line-height:1.7;}
+/* LAUDO */
+.ta{background:var(--w08);border:1px solid var(--w30);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--w);outline:none;width:100%;font-family:var(--font-sans);resize:vertical;min-height:90px;line-height:1.7;}
 .ta::placeholder{color:var(--w30);}
 .ta:focus{border-color:var(--cy);}
 
+/* VEREDICTO */
 .verd-card{background:var(--nv3);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.75rem;}
-.vtag{display:inline-block;border-radius:5px;padding:3px 10px;font-size:var(--fzxs);font-weight:500;margin-bottom:.5rem;}
+.vtag{display:inline-block;border-radius:5px;padding:3px 10px;font-size:12px;font-weight:500;margin-bottom:.5rem;}
 .vtag.ok{background:rgba(99,153,34,.2);color:#97C459;}
 .vtag.par{background:rgba(239,159,39,.2);color:var(--am);}
 .vtag.err{background:var(--orb);color:var(--or2);}
-.vtitle{font-size:var(--fzs);font-weight:500;color:var(--w);margin-bottom:6px;}
-.vtxt{font-size:var(--fzs);color:var(--w60);line-height:1.7;}
+.vtitle{font-size:15px;font-weight:500;color:var(--w);margin-bottom:6px;}
+.vtxt{font-size:14px;color:var(--w60);line-height:1.7;}
 .profile-card{background:var(--cy3);border:1px solid rgba(26,184,216,.25);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.75rem;}
-.pname{font-size:var(--fzs);font-weight:500;color:var(--cy);margin-bottom:3px;}
-.pdesc{font-size:var(--fzs);color:var(--w60);line-height:1.65;}
+.pname{font-size:15px;font-weight:500;color:var(--cy);margin-bottom:3px;}
+.pdesc{font-size:14px;color:var(--w60);line-height:1.65;}
 .act-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:.65rem;}
-.act-num{width:22px;height:22px;min-width:22px;border-radius:50%;background:var(--cy);color:var(--nv);font-size:var(--fzxs);font-weight:500;display:flex;align-items:center;justify-content:center;margin-top:1px;}
-.act-txt{font-size:var(--fzs);color:var(--w60);line-height:1.6;}
+.act-num{width:22px;height:22px;min-width:22px;border-radius:50%;background:var(--cy);color:var(--nv);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.act-txt{font-size:14px;color:var(--w60);line-height:1.6;}
 .divider{height:1px;background:var(--w15);margin:.85rem 0;}
 .share-row{display:flex;gap:8px;flex-wrap:wrap;}
-.share-btn{flex:1;min-width:130px;background:var(--w08);border:1px solid var(--w15);border-radius:8px;padding:.75rem;font-size:var(--fzxs);color:var(--w60);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;}
+.share-btn{flex:1;min-width:140px;background:var(--w08);border:1px solid var(--w15);border-radius:8px;padding:.75rem;font-size:13px;color:var(--w60);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;}
 .share-btn:hover{border-color:var(--cy);color:var(--w);}
-
-.sep{height:1px;background:var(--w15);}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
 </style>
 
-<h2 class="sr-only">CSI Revvo — Temporada 2: A Inovação que Nunca Saiu da Gaveta. Game individual de liderança sobre ambientes de inovação.</h2>
+<h2 class="sr-only">CSI Revvo T2 — A inovação que nunca saiu da gaveta. Game individual de liderança para o Jeito Revvo de Liderar.</h2>
 <div class="wrap" id="app"></div>
 
 <script>
 const W=window;
 W._n='';W._a='';W._flags={};W._sus='';W._laudo='';W._acoes='';
 
-const LOGO=`<svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-  <circle cx="19" cy="8" r="5" fill="#1AB8D8" opacity=".9"/>
-  <path d="M10 34 Q19 18 28 34" stroke="#1AB8D8" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M17 24 L24 17 L27 21" stroke="#E8420A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M24 17 L24 22 M24 17 L19 17" stroke="#E8420A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-</svg>`;
+const LOGO_B64='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';
+
+const LOGO_HTML=`<img src="data:image/png;base64,${LOGO_B64}" class="hero-logo" alt="Jeito Revvo de Liderar"/>`;
 
 const HERO_HTML=()=>`<div class="hero">
   <div class="logo-row">
-    ${LOGO}
+    ${LOGO_HTML}
     <div style="flex:1;min-width:0;">
-      <div class="logo-text-top">Jeito Revvo de Liderar · Temporada 2</div>
-      <div class="logo-text-main">Liderança que proporciona <span>ambientes de inovação</span></div>
+      <div class="logo-txt-top">Jeito Revvo de Liderar · Temporada 2</div>
+      <div class="logo-txt-main">Liderança que proporciona <span>ambientes de inovação</span></div>
     </div>
     <div class="agent-pill">RevvoAgente: ${W._n||'?'}</div>
   </div>
-  <div class="hero-case"><div class="case-pill">CASO #02 · CONFIDENCIAL</div></div>
+  <div class="hero-case-row"><div class="case-pill">CASO #02 · CONFIDENCIAL</div></div>
   <div class="hero-title">A inovação que <em>nunca saiu da gaveta</em></div>
   <div class="hero-sub">Uma ideia surgiu. Tinha potencial. Morreu antes de virar ação. Investigue por quê.</div>
 </div><div class="sep"></div>`;
@@ -167,96 +162,92 @@ const PROG=(s)=>{
 };
 
 const EVS=[
-  {id:'e1',icon:'ti-message-circle',c:'#1AB8D8',bg:'rgba(26,184,216,.18)',
-   title:'Mensagem no Teams',meta:'Marina, Analista de Produto — 3 semanas atrás',
-   body:'"Oi, tenho uma ideia pra apresentar na reunião de quinta. Acho que dá pra simplificar o fluxo de onboarding dos clientes — reduziria o tempo de ativação em 30%. Posso ter 10 minutos na pauta?"',
-   flags:['ideia concreta com dado','iniciativa própria','pediu espaço formalmente']},
-  {id:'e2',icon:'ti-calendar',c:'#EF9F27',bg:'rgba(239,159,39,.18)',
-   title:'Ata da reunião de quinta',meta:'Reunião semanal · 73 minutos de duração',
-   body:'Pauta coberta: métricas (22min), bugs da sprint (31min), alinhamento NPS (15min). Tempo restante: 5 minutos. Sem espaço para novos itens. Marina presente — não falou.',
-   flags:['pauta fechada','sem margem para inovação','Marina silenciada']},
-  {id:'e3',icon:'ti-message',c:'#EF9F27',bg:'rgba(239,159,39,.18)',
-   title:'Resposta do RevvoLíder no Teams',meta:'2 horas após a mensagem de Marina',
-   body:'"Marina, ótimo que você está pensando nisso! A pauta de quinta está bem cheia, mas traz por escrito que eu leio com calma. Se fizer sentido, encaixamos numa próxima."',
-   flags:['adiamento sem data','esforço delegado a Marina','sem comprometimento real']},
-  {id:'e4',icon:'ti-file-text',c:'#5DCAA5',bg:'rgba(29,158,117,.18)',
-   title:'Documento enviado por Marina',meta:'Google Doc · 3 páginas — 4 dias depois',
-   body:'Marina escreveu análise do problema, proposta, estimativa de impacto e referências de outras empresas. Visualizações: 1 (o próprio autor). Nenhum comentário recebido.',
-   flags:['esforço alto ignorado','nenhum feedback do líder','documento nunca discutido']},
-  {id:'e5',icon:'ti-user-x',c:'#E8420A',bg:'rgba(232,66,10,.18)',
-   title:'1:1 com Marina — 2 semanas depois',meta:'Anotação do RevvoLíder',
-   body:'"Marina bem, entregando bem na sprint. Perguntei sobre a ideia do onboarding — ela disse \'tudo bem, foi só uma ideia\'. Tom resignado. Não aprofundei."',
-   flags:['resignação visível','líder não investigou','oportunidade perdida']},
-  {id:'e6',icon:'ti-alert-circle',c:'#E8420A',bg:'rgba(232,66,10,.18)',
-   title:'Pesquisa de clima — resposta anônima',meta:'Pergunta: "Você se sente encorajado a trazer novas ideias?"',
-   body:'"Quando trago ideias, a resposta é sempre \'anota aí e a gente vê depois\'. Depois nunca vem. Parei de trazer."',
-   flags:['padrão recorrente','não é só Marina','cultura de silêncio se formando']},
+  {num:1,icon:'ti-message-circle',c:'#1AB8D8',title:'Mensagem no Teams',meta:'Marina, Analista de Produto — 3 semanas atrás',
+   body:'"Oi, tenho uma ideia pra mostrar na reunião de quinta. Acho que dá pra deixar bem mais simples o caminho que o cliente faz quando entra na plataforma — daria pra cortar pelo menos 30% do tempo. Posso ter 10 minutos na pauta?"',
+   flags:['ideia com número concreto','a pessoa veio por conta própria','pediu espaço de forma educada']},
+  {num:2,icon:'ti-calendar',c:'#EF9F27',title:'Ata da reunião de quinta',meta:'Reunião semanal · 73 minutos',
+   body:'O que foi visto: números da semana (22 min), problemas técnicos da entrega (31 min), alinhamento com time de atendimento (15 min). Sobrou 5 minutos. Sem espaço para novas ideias. Marina estava presente — ficou em silêncio.',
+   flags:['reunião cheia sem sobra de tempo','nenhum espaço para coisas novas','Marina não falou nada']},
+  {num:3,icon:'ti-message',c:'#EF9F27',title:'Resposta do RevvoLíder no Teams',meta:'2 horas depois da mensagem de Marina',
+   body:'"Marina, que bom que você está pensando nisso! A pauta de quinta está bem apertada, mas me manda por escrito que eu leio com calma. Se fizer sentido, a gente encaixa num próximo momento."',
+   flags:['sem data definida para responder','jogou a responsabilidade para Marina','não prometeu nada de concreto']},
+  {num:4,icon:'ti-file-text',c:'#5DCAA5',title:'Documento enviado por Marina',meta:'Google Doc com 3 páginas — 4 dias depois',
+   body:'Marina montou um documento com o problema explicado, a solução proposta, quanto isso poderia impactar e exemplos de empresas que fizeram algo parecido. Número de visualizações: 1 (ela mesma). Nenhum comentário foi feito.',
+   flags:['Marina fez um trabalho grande','o líder nem abriu o documento','nenhuma resposta foi dada']},
+  {num:5,icon:'ti-user-x',c:'#E8420A',title:'Conversa individual com Marina',meta:'2 semanas depois — anotação do RevvoLíder',
+   body:'"Marina bem. Entregando na sprint. Perguntei sobre a ideia do fluxo de entrada — ela disse \'tudo bem, foi só uma ideia\'. Tom resignado. Não perguntei mais nada."',
+   flags:['Marina parece ter desistido','o líder notou mas não aprofundou','uma boa conversa foi desperdiçada']},
+  {num:6,icon:'ti-alert-circle',c:'#E8420A',title:'Resposta anônima na pesquisa de clima',meta:'Pergunta: "Você se sente encorajado a trazer novas ideias?"',
+   body:'"Quando trago uma ideia, a resposta é sempre \'anota aí e a gente vê depois\'. O depois nunca chega. Parei de trazer."',
+   flags:['isso acontece com mais de uma pessoa','o time aprendeu que não vale a pena','ambiente de silêncio se instalou']},
 ];
 
 const SUSPECTS=[
-  {id:'s1',name:'O RevvoLíder',role:'Intenção boa, impacto ruim',c:'#1AB8D8',bg:'rgba(26,184,216,.18)',
-   motive:'Nunca criou estrutura para inovação. Reagiu à ideia como mais um item de agenda — e a agenda já estava cheia.'},
-  {id:'s2',name:'A Reunião',role:'O processo sem margem',c:'#EF9F27',bg:'rgba(239,159,39,.18)',
-   motive:'Pauta sempre cheia, 73 min sem margem. Mas quem define a pauta é o líder — a reunião não se agenda sozinha.'},
+  {id:'s1',name:'O RevvoLíder',role:'Boa intenção, efeito ruim',c:'#1AB8D8',bg:'rgba(26,184,216,.18)',
+   motive:'Nunca criou um espaço real para novas ideias. Reagiu à proposta de Marina como mais uma tarefa — e a agenda já estava lotada.'},
+  {id:'s2',name:'A Reunião',role:'O processo sem espaço',c:'#EF9F27',bg:'rgba(239,159,39,.18)',
+   motive:'73 minutos sem uma brecha. Mas quem decide o que entra na pauta é o líder — a reunião não se monta sozinha.'},
   {id:'s3',name:'Marina',role:'A analista',c:'#5DCAA5',bg:'rgba(29,158,117,.18)',
-   motive:'Desistiu rápido demais? Ou aprendeu com o histórico que desistir é racional? Ela fez tudo certo.'},
-  {id:'s4',name:'A Cultura',role:'O ambiente',c:'#E8420A',bg:'rgba(232,66,10,.18)',
-   motive:'Cultura silencia ideias — mas é produto de comportamentos repetidos do líder. Não existe por acaso.'},
+   motive:'Desistiu rápido demais? Ou aprendeu com o histórico que desistir é mais inteligente do que insistir? Ela fez tudo certo.'},
+  {id:'s4',name:'A Cultura',role:'O ambiente do time',c:'#E8420A',bg:'rgba(232,66,10,.18)',
+   motive:'O ambiente silencia ideias. Mas cultura não surge do nada — ela é feita de escolhas repetidas do líder ao longo do tempo.'},
 ];
 
 const VERD={
-  s1:{tag:'par',tl:'quase lá — correto, mas incompleto',title:'O RevvoLíder é o centro — mas o sistema todo falhou.',
-    txt:'Correto que o líder é o ponto crítico. Mas reduzi-lo ao "culpado" esconde o diagnóstico real: ele não construiu estrutura, o que permitiu que a reunião, a cultura e o silêncio de Marina se consolidassem juntos. Um responsável individual não muda um sistema. O ambiente precisa ser redesenhado — e quem faz isso é o líder.'},
-  s2:{tag:'par',tl:'parcialmente correto',title:'A reunião contribuiu — mas não é a causa raiz.',
-    txt:'A pauta cheia é sintoma. Quem decide o que entra na pauta é o líder. Reformar a reunião sem mudar a postura de quem a conduz muda a forma, não o resultado. A inovação não morreu porque o slot estava cheio — morreu porque nunca foi tratada como prioridade.'},
-  s3:{tag:'err',tl:'diagnóstico incorreto',title:'Marina não é suspeita — é vítima do ambiente.',
-    txt:'Culpar Marina por ter desistido é o mesmo que culpar quem pede demissão por "não ter lutado mais". Ela fez tudo certo: trouxe a ideia com dado, formalizou, escreveu 3 páginas. O ambiente respondeu com silêncio. A resignação dela é dado diagnóstico — não falha pessoal.'},
-  s4:{tag:'par',tl:'visão sistêmica — boa, mas incompleta',title:'A cultura é o cenário. O líder é o diretor.',
-    txt:'Correto que a cultura silencia ideias. Mas cultura não se forma sozinha — é produto de comportamentos do líder acumulados ao longo do tempo. Apontar "a cultura" sem nomear quem a constrói é o caminho mais seguro para não mudar nada.'},
+  s1:{tag:'par',tl:'quase lá — correto, mas incompleto',title:'O RevvoLíder é o centro — mas o sistema todo contribuiu.',
+    txt:'Correto que o líder é o ponto mais importante. Mas colocar toda a culpa nele esconde o diagnóstico real: ele não criou estrutura, e isso permitiu que a reunião, a cultura e o silêncio de Marina se juntassem. Uma pessoa sozinha sendo "culpada" não muda um sistema. O ambiente precisa ser redesenhado — e quem faz isso é o líder.'},
+  s2:{tag:'par',tl:'parcialmente correto',title:'A reunião colaborou — mas não é o problema de fundo.',
+    txt:'A pauta cheia é um sintoma. Quem decide o que entra na reunião é o líder. Mudar o formato sem mudar a postura de quem conduz resolve a forma, mas não o conteúdo. A ideia de Marina não morreu porque o horário estava ocupado — morreu porque nunca foi tratada como prioridade.'},
+  s3:{tag:'err',tl:'diagnóstico incorreto',title:'Marina não é suspeita — ela é quem sofreu com o ambiente.',
+    txt:'Culpar Marina por ter desistido é como culpar alguém que pediu demissão por "não ter lutado o suficiente". Ela fez tudo certo: trouxe a ideia com dados, formalizou o pedido, escreveu 3 páginas. O ambiente respondeu com silêncio. A desistência dela é um sinal — não uma falha.'},
+  s4:{tag:'par',tl:'visão ampla — boa, mas incompleta',title:'A cultura é o palco. O líder é quem monta o cenário.',
+    txt:'Verdade que a cultura apaga ideias. Mas cultura não se forma sozinha — ela é o resultado de comportamentos do líder que se repetem ao longo do tempo. Apontar "a cultura" sem nomear quem a constrói é o caminho mais fácil para não mudar nada.'},
 };
 
 const PROFILES={
-  alto:{name:'RevvoAgente de alta acuidade',
-    desc:'Você identificou o padrão sistêmico: não é um culpado isolado, é um ambiente construído por escolhas de liderança repetidas. Você está pronto para redesenhar esse ambiente no seu time.',
-    actions:['Reserve 15 minutos fixos em toda reunião semanal para "ideias abertas" — sem julgamento, sem decisão imediata.','Quando alguém trouxer uma ideia, responda com data: "vou ler até quarta e te dou retorno na quinta."','No próximo 1:1, pergunte: "tem alguma ideia que você deixou de trazer? Por quê?"']},
+  alto:{name:'RevvoAgente de alta percepção',
+    desc:'Você enxergou o padrão por trás dos fatos: não é um culpado isolado, é um ambiente construído por escolhas de liderança que se acumularam. Você está pronto para mudar isso no seu time.',
+    actions:['Reserve 15 minutos fixos em toda reunião semanal para "ideias em aberto" — sem julgamento e sem decisão imediata.','Quando alguém trouxer uma ideia, responda com uma data: "vou olhar até quarta e te dou retorno na quinta."','No próximo 1:1, pergunte diretamente: "você tem alguma ideia que deixou de trazer? Por quê?"']},
   medio:{name:'RevvoAgente em desenvolvimento',
-    desc:'Você identificou parte do problema. A tendência é focar no elemento mais visível sem ver como os fatores se retroalimentam. O diagnóstico completo exige olhar para o sistema.',
-    actions:['Liste as últimas 3 ideias que seu time trouxe. O que aconteceu com cada uma?','Observe se suas reuniões têm margem para o inesperado — ou se estão pautadas até o fim.','Pergunte a um liderado de confiança: você se sente à vontade para trazer ideias pra mim?']},
+    desc:'Você identificou parte do problema. A tendência é focar no que é mais visível sem perceber como os fatores se alimentam entre si. O diagnóstico completo exige olhar para o sistema — não para uma peça isolada.',
+    actions:['Pense nas últimas 3 ideias que alguém do seu time trouxe. O que aconteceu com cada uma?','Observe se suas reuniões têm espaço para o inesperado — ou se estão cheias até o fim.','Pergunte a alguém de confiança no time: "você se sente à vontade para me trazer ideias?"']},
   baixo:{name:'RevvoAgente iniciante',
-    desc:'Você apontou para um elemento isolado. O diagnóstico de ambiente de inovação é sempre sistêmico. Nenhum culpado sozinho explica — e nenhuma solução pontual resolve.',
-    actions:['Releia as 6 evidências perguntando: o que o RevvoLíder poderia ter feito diferente em cada momento?','Converse com alguém do seu time sobre o que tornaria mais fácil trazer ideias para você.','No workshop, traga este caso como ponto de reflexão pessoal.']},
+    desc:'Você apontou para um elemento isolado. O diagnóstico de ambiente de inovação é sempre mais amplo: o líder, o processo, a cultura e as pessoas se influenciam o tempo todo. Nenhum culpado único explica — e nenhuma solução pontual resolve.',
+    actions:['Releia as 6 evidências com esta pergunta em mente: o que o RevvoLíder poderia ter feito diferente em cada momento?','Converse com alguém do seu time sobre o que tornaria mais fácil trazer ideias para você.','No workshop, use este caso como ponto de reflexão pessoal.']},
 };
 
 function r(html){document.getElementById('app').innerHTML=html;}
 
 function showEnvelope(){
   r(`<div class="env-wrap">
-    <div class="env-eyebrow"><i class="ti ti-lock" aria-hidden="true" style="margin-right:5px;"></i>documento confidencial — para o RevvoAgente</div>
-    <div class="env-outer" id="env-outer" onclick="animateOpen()">
-      <svg class="env-svg" viewBox="0 0 340 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="1" y="40" width="338" height="179" rx="6" fill="#162848" stroke="#1AB8D8" stroke-width="1.5"/>
-        <path d="M1 40 L170 130 L339 40" stroke="#1AB8D8" stroke-width="1.2"/>
-        <path d="M1 219 L110 130" stroke="#0D8FAA" stroke-width="1"/>
-        <path d="M339 219 L230 130" stroke="#0D8FAA" stroke-width="1"/>
-        <rect x="275" y="50" width="48" height="36" rx="3" fill="rgba(232,66,10,.18)" stroke="#E8420A" stroke-width="1"/>
-        <text x="299" y="71" text-anchor="middle" font-family="Arial" font-size="9" fill="#FF6B35" font-weight="bold">CSI</text>
-        <text x="170" y="155" text-anchor="middle" font-family="Arial" font-size="13" fill="white" font-weight="500">RevvoAgente</text>
-        <text x="170" y="173" text-anchor="middle" font-family="Arial" font-size="11" fill="#1AB8D8">Jeito Revvo de Liderar · T2</text>
-        <text x="170" y="193" text-anchor="middle" font-family="Arial" font-size="10" fill="rgba(255,255,255,.4)">Caso #02 · Confidencial</text>
-        <g id="flap" style="transform-origin:170px 40px;transform:rotateX(0deg);transition:transform .55s cubic-bezier(.4,0,.2,1);">
-          <path d="M1 40 L170 128 L339 40 L1 40Z" fill="#1C3358" stroke="#1AB8D8" stroke-width="1.5" stroke-linejoin="round"/>
+    <div class="env-eyebrow"><i class="ti ti-lock" aria-hidden="true" style="margin-right:5px;font-size:15px;"></i>documento confidencial — para o RevvoAgente</div>
+    <div class="env-outer">
+      <svg id="env-svg" viewBox="0 0 360 230" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;cursor:pointer;" onclick="animateOpen()">
+        <rect x="1" y="42" width="358" height="187" rx="6" fill="#162848" stroke="#1AB8D8" stroke-width="1.5"/>
+        <path d="M1 229 L118 138" stroke="#0D8FAA" stroke-width="1.2"/>
+        <path d="M359 229 L242 138" stroke="#0D8FAA" stroke-width="1.2"/>
+        <rect x="283" y="52" width="58" height="38" rx="3" fill="rgba(232,66,10,.18)" stroke="#E8420A" stroke-width="1.2"/>
+        <text x="312" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#FF6B35" font-weight="bold" letter-spacing="0.5">CASO #02</text>
+        <text x="312" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#FF6B35">CONFIDENCIAL</text>
+        <text x="180" y="165" text-anchor="middle" font-family="Arial" font-size="14" fill="white" font-weight="500">RevvoAgente</text>
+        <text x="180" y="183" text-anchor="middle" font-family="Arial" font-size="11" fill="#1AB8D8">Jeito Revvo de Liderar · T2</text>
+        <text x="180" y="201" text-anchor="middle" font-family="Arial" font-size="10" fill="rgba(255,255,255,.35)">Inovação · 2026</text>
+        <path d="M1 42 L180 42 L359 42" stroke="#1AB8D8" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <g id="flap-g" style="transform-origin:180px 42px;transform:rotateX(0deg);transition:transform .55s cubic-bezier(.4,0,.2,1);">
+          <path d="M1 42 L180 135 L359 42 Z" fill="#1C3358" stroke="#1AB8D8" stroke-width="1.5" stroke-linejoin="round"/>
         </g>
-        <g id="letter" style="opacity:0;transform:translateY(0px);transition:opacity .4s ease .35s,transform .55s ease .35s;">
-          <rect x="90" y="15" width="160" height="110" rx="4" fill="white" opacity=".95"/>
-          <rect x="90" y="15" width="160" height="18" rx="4" fill="#0B1628"/>
-          <text x="170" y="27" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1AB8D8" font-weight="bold" letter-spacing="1">CONFIDENCIAL · CSI REVVO</text>
-          <text x="170" y="50" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1A2B3C">RevvoAgente,</text>
-          <text x="170" y="65" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">Uma ideia surgiu. Era boa.</text>
-          <text x="170" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E8420A" font-weight="bold">Três semanas depois, estava morta.</text>
-          <text x="170" y="92" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">O que a matou?</text>
-          <text x="170" y="105" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">Essa é a sua missão.</text>
-          <line x1="110" y1="117" x2="230" y2="117" stroke="#C5D0E0" stroke-width="0.8"/>
-          <text x="170" y="126" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#7A9ABB">Central de Investigação Revvo</text>
+        <g id="letter-g" style="opacity:0;transform:translateY(0px);transition:opacity .45s ease .3s,transform .55s ease .3s;">
+          <rect x="100" y="10" width="160" height="112" rx="4" fill="white" opacity=".97"/>
+          <rect x="100" y="10" width="160" height="20" rx="4" fill="#0B1628"/>
+          <text x="180" y="24" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1AB8D8" font-weight="bold" letter-spacing="1">CONFIDENCIAL · CSI REVVO</text>
+          <text x="180" y="46" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1A2B3C" font-weight="bold">RevvoAgente,</text>
+          <text x="180" y="60" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">Uma ideia surgiu. Era boa.</text>
+          <text x="180" y="73" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E8420A" font-weight="bold">Três semanas depois, estava morta.</text>
+          <text x="180" y="87" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">Sem decisão. Sem feedback.</text>
+          <text x="180" y="100" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#3A5A7A">Sem nem ter sido discutida.</text>
+          <text x="180" y="114" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1A2B3C" font-weight="bold">O que a matou? Essa é a sua missão.</text>
+          <line x1="115" y1="121" x2="245" y2="121" stroke="#C5D0E0" stroke-width="0.8"/>
+          <text x="180" y="130" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#7A9ABB">Central de Investigação Revvo</text>
         </g>
       </svg>
     </div>
@@ -266,13 +257,13 @@ function showEnvelope(){
 }
 
 function animateOpen(){
-  const flap=document.getElementById('flap');
-  const letter=document.getElementById('letter');
+  const flap=document.getElementById('flap-g');
+  const letter=document.getElementById('letter-g');
   if(!flap||!letter)return;
   flap.style.transform='rotateX(180deg)';
   letter.style.opacity='1';
-  letter.style.transform='translateY(-55px)';
-  setTimeout(()=>showCarta(),900);
+  letter.style.transform='translateY(-62px)';
+  setTimeout(()=>showCarta(),950);
 }
 
 function showCarta(){
@@ -280,29 +271,29 @@ function showCarta(){
     <div class="carta-paper">
       <div class="carta-top">
         <div style="display:flex;align-items:center;gap:10px;">
-          ${LOGO}
+          ${LOGO_HTML}
           <div>
-            <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);">Jeito Revvo de Liderar</div>
-            <div style="font-size:14px;font-weight:500;color:#fff;">Central de Investigação · CSI</div>
+            <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);">Jeito Revvo de Liderar</div>
+            <div style="font-size:15px;font-weight:500;color:#fff;">Central de Investigação · CSI</div>
           </div>
         </div>
         <div class="carta-classify">CONFIDENCIAL</div>
       </div>
       <div class="carta-body">
         <p>RevvoAgente,</p>
-        <p>Você foi selecionado para investigar um caso que acontece com mais frequência do que gostaríamos de admitir dentro das nossas organizações. Um caso sem crime intencional, sem conflito declarado, sem nenhum vilão óbvio.</p>
-        <p>Uma ideia surgiu. Era boa. Tinha dados, tinha proposta, tinha uma pessoa disposta a executar. <span class="hl-or">Três semanas depois, essa ideia estava morta</span> — sem decisão, sem feedback, sem nem ter sido discutida.</p>
+        <p>Você foi escolhido para investigar um caso que acontece mais do que gostaríamos de admitir nas nossas organizações. Sem crime intencional. Sem conflito. Sem um vilão claro.</p>
+        <p>Uma ideia surgiu. Era boa. Tinha dados, tinha proposta, tinha uma pessoa disposta a fazer acontecer. <span class="hl-or">Três semanas depois, essa ideia estava morta</span> — sem decisão, sem feedback, sem nem ter sido discutida de verdade.</p>
         <p>O que a matou? <span class="hl">Essa é a sua missão.</span></p>
-        <p>Você vai analisar 6 evidências, identificar o principal responsável, escrever o laudo e receber seu perfil de investigação com ações concretas para a próxima semana.</p>
+        <p>Você vai analisar 6 evidências, marcar o que chamar atenção, apontar o principal responsável, escrever o seu diagnóstico e receber um perfil com ações concretas para a próxima semana.</p>
         <p style="font-weight:500;color:#fff;">O caso não tem resposta certa — tem consequência real.</p>
       </div>
       <div class="carta-ass">
-        <div style="font-size:14px;font-weight:500;color:#fff;">Central de Investigação Revvo</div>
+        <div style="font-size:15px;font-weight:500;color:#fff;">Central de Investigação Revvo · CSI</div>
         <div style="font-size:12px;color:rgba(255,255,255,.3);margin-top:2px;">Jeito Revvo de Liderar · Temporada 2 · Inovação</div>
       </div>
     </div>
     <div class="qr-box">
-      <div class="qr-ph"><i class="ti ti-qrcode" aria-hidden="true" style="font-size:30px;color:rgba(255,255,255,.3);"></i></div>
+      <div class="qr-ph"><i class="ti ti-qrcode" aria-hidden="true" style="font-size:32px;color:rgba(255,255,255,.3);"></i></div>
       <div>
         <div class="qr-txt">Acesse pelo QR code na carta física ou pelo link:</div>
         <div class="qr-url">revvogg.github.io/csi-inovacao-t2</div>
@@ -316,10 +307,10 @@ function showCarta(){
 function showId(){
   r(`<div class="id-wrap">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;">
-      ${LOGO}
+      ${LOGO_HTML}
       <div>
         <div style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;">Jeito Revvo de Liderar · T2</div>
-        <div style="font-size:16px;font-weight:500;color:#fff;">Identificação do RevvoAgente</div>
+        <div style="font-size:17px;font-weight:500;color:#fff;">Identificação do RevvoAgente</div>
       </div>
     </div>
     <div style="margin-bottom:.85rem;">
@@ -337,7 +328,7 @@ function showId(){
     </div>
     <div class="info-box" style="margin-bottom:.85rem;">
       <div style="font-size:13px;color:#1AB8D8;margin-bottom:5px;"><i class="ti ti-info-circle" aria-hidden="true" style="margin-right:4px;"></i>sobre o caso</div>
-      <div style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Você vai analisar 6 evidências, marcar padrões, apontar o principal responsável, escrever o laudo e receber seu perfil de investigação com 3 ações concretas.</div>
+      <div style="font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;">Você vai analisar 6 evidências, marcar os pontos que chamam atenção, escolher o principal responsável, escrever o seu diagnóstico e receber um perfil de investigação com 3 ações concretas.</div>
     </div>
     <button class="btn-p" onclick="startGame()">entrar na cena do crime <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
   </div>`);
@@ -359,17 +350,17 @@ function showEvidencias(){
     }).join('');
     evs+=`<div class="ev-card">
       <div class="ev-head">
-        <div class="ev-icon" style="background:${e.bg};"><i class="ti ${e.icon}" aria-hidden="true" style="font-size:17px;color:${e.c};"></i></div>
+        <div class="ev-num">${e.num}</div>
         <div><div class="ev-title">${e.title}</div><div class="ev-meta">${e.meta}</div></div>
       </div>
       <div class="ev-body">${e.body}</div>
-      <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:8px;">marque o que chama atenção:</div>
+      <div class="ev-flags-lbl">o que chama atenção aqui?</div>
       <div class="ev-flags">${flags}</div>
     </div>`;
   });
   r(HERO_HTML()+PROG(0)+`<div class="gw">
     <div class="scene-card"><div class="scene-lbl"><i class="ti ti-file-search" aria-hidden="true" style="margin-right:4px;"></i>6 evidências para analisar</div>
-    <div class="scene-txt">Leia cada peça com atenção. Marque os padrões que identificar — eles vão compor o seu laudo.</div></div>
+    <div class="scene-txt">Leia cada peça com atenção. Marque o que chamar atenção em cada uma — isso vai compor o seu diagnóstico no final.</div></div>
     ${evs}
     <button class="btn-p" onclick="showSuspeitos()">avançar para os suspeitos <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
   </div>`);
@@ -392,9 +383,9 @@ function showSuspeitos(){
     </div>`).join('');
   r(HERO_HTML()+PROG(1)+`<div class="gw">
     <div class="tension-card"><div class="tension-lbl"><i class="ti ti-alert-triangle" aria-hidden="true" style="margin-right:5px;"></i>quem matou a inovação?</div>
-    <div class="tension-txt">Com base nas evidências, selecione o principal responsável. Clique no suspeito para ver o motivo antes de confirmar.</div></div>
+    <div class="tension-txt">Com base no que você leu, quem é o principal responsável? Clique no suspeito para ver o que pode estar por trás da escolha — antes de confirmar.</div></div>
     <div class="sus-grid">${cards}</div>
-    <button class="btn-p" id="btn-sus" ${W._sus?'':'disabled'} style="${W._sus?'':'opacity:.4;cursor:not-allowed;'}" onclick="showLaudo()">confirmar e escrever laudo <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
+    <button class="btn-p" id="btn-sus" ${W._sus?'':'disabled'} style="${W._sus?'':'opacity:.4;cursor:not-allowed;'}" onclick="showLaudo()">confirmar e escrever o diagnóstico <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
   </div>`);
 }
 
@@ -407,17 +398,17 @@ function pickSus(id){
 
 function showLaudo(){
   r(HERO_HTML()+PROG(2)+`<div class="gw">
-    <div class="scene-card"><div class="scene-lbl"><i class="ti ti-file-pencil" aria-hidden="true" style="margin-right:4px;"></i>escreva o laudo</div>
-    <div class="scene-txt">Com base nas evidências marcadas e no suspeito identificado, escreva suas conclusões. O laudo revela como você lê os dados — não há resposta certa, há diagnóstico mais ou menos completo.</div></div>
+    <div class="scene-card"><div class="scene-lbl"><i class="ti ti-file-pencil" aria-hidden="true" style="margin-right:4px;"></i>escreva o diagnóstico</div>
+    <div class="scene-txt">Com base no que você marcou e no suspeito que escolheu, escreva o que você concluiu. O diagnóstico revela como você lê os dados — não há resposta certa, há análise mais ou menos completa.</div></div>
     <div style="margin-bottom:.85rem;">
       <div class="lbl">o que matou essa inovação?</div>
-      <textarea class="ta" id="t-l" placeholder="Descreva o mecanismo: o que aconteceu, em que ordem, com que impacto?">${W._laudo}</textarea>
+      <textarea class="ta" id="t-l" placeholder="Descreva o que aconteceu, em que ordem e qual foi o impacto. Seja direto.">${W._laudo}</textarea>
     </div>
     <div style="margin-bottom:.85rem;">
       <div class="lbl">o que o RevvoLíder poderia ter feito diferente?</div>
-      <textarea class="ta" id="t-a" placeholder="Liste 2 ou 3 comportamentos concretos que teriam mudado o desfecho.">${W._acoes}</textarea>
+      <textarea class="ta" id="t-a" placeholder="Liste 2 ou 3 atitudes concretas que teriam mudado o resultado desta história.">${W._acoes}</textarea>
     </div>
-    <button class="btn-p" onclick="submitLaudo()">enviar laudo e ver veredicto <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
+    <button class="btn-p" onclick="submitLaudo()">enviar e ver o veredicto <i class="ti ti-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></button>
   </div>`);
 }
 
@@ -442,21 +433,21 @@ function showVeredicto(){
       <div class="vtxt">${v.txt}</div>
     </div>
     <div class="verd-card" style="display:flex;align-items:flex-start;gap:12px;">
-      <div style="width:40px;height:40px;min-width:40px;border-radius:50%;background:${sus.bg};display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;color:${sus.c};">${sus.name[0]}</div>
-      <div><div style="font-size:14px;font-weight:500;color:#fff;margin-bottom:4px;">${sus.name}</div><div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;">${sus.motive}</div></div>
+      <div style="width:42px;height:42px;min-width:42px;border-radius:50%;background:${sus.bg};display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;color:${sus.c};">${sus.name[0]}</div>
+      <div><div style="font-size:15px;font-weight:500;color:#fff;margin-bottom:4px;">${sus.name}</div><div style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.6;">${sus.motive}</div></div>
     </div>
     <div class="divider"></div>
     <div class="lbl" style="margin-bottom:.65rem;">seu perfil de investigação</div>
     <div class="profile-card">
       <div class="pname">${p.name}</div>
-      <div style="font-size:12px;color:#0D8FAA;margin-bottom:6px;">${fc} padrões identificados nas evidências</div>
+      <div style="font-size:12px;color:#0D8FAA;margin-bottom:6px;">${fc} pontos marcados nas evidências</div>
       <div class="pdesc">${p.desc}</div>
     </div>
     <div class="lbl" style="margin-bottom:.65rem;">3 ações para a próxima semana</div>
     ${p.actions.map((a,i)=>`<div class="act-row"><div class="act-num">${i+1}</div><div class="act-txt">${a}</div></div>`).join('')}
     <div class="divider"></div>
     <div class="share-row">
-      <button class="share-btn" onclick="sendPrompt('Meu laudo no CSI Revvo T2: suspeito=${sus.name}. Laudo: ${W._laudo.substring(0,100)}... Quero aprofundar esse diagnóstico sobre ambiente de inovação.')"><i class="ti ti-messages" aria-hidden="true" style="font-size:14px;"></i>aprofundar diagnóstico ↗</button>
+      <button class="share-btn" onclick="sendPrompt('Meu diagnóstico no CSI Revvo T2: suspeito=${sus.name}. Conclusão: ${W._laudo.substring(0,100)}... Quero aprofundar essa análise sobre ambiente de inovação.')"><i class="ti ti-messages" aria-hidden="true" style="font-size:14px;"></i>aprofundar análise ↗</button>
       <button class="share-btn" onclick="sendPrompt('Com base no perfil ${p.name}, me ajuda a criar um plano de 30 dias para mudar o ambiente de inovação do meu time.')"><i class="ti ti-checklist" aria-hidden="true" style="font-size:14px;"></i>plano de 30 dias ↗</button>
     </div>
     <button class="btn-o" onclick="restart()" style="margin-top:.5rem;"><i class="ti ti-refresh" aria-hidden="true" style="margin-right:5px;"></i>reiniciar investigação</button>
