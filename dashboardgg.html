@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard RH · Jeito Revvo de Liderar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050810; --bg-1:#0a1220; --bg-2:#0e1c30; --panel:#101f36;
+    --cyan:#2ad2ec; --cyan-dim:#1a7f91; --orange:#ff5a2b;
+    --paper:#efe8d6; --ink:#221d15;
+    --white:#f3f6fb; --muted:#7d8ba7; --line:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;}
+  .wrap{max-width:1100px; margin:0 auto; padding:40px 24px 90px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Oswald',sans-serif; letter-spacing:.1em; text-transform:uppercase;}
+  .brand small{font-size:.62em; color:var(--cyan); letter-spacing:.28em; display:block; font-weight:500;}
+  .brand .word{font-size:1.5em; font-weight:700; color:var(--white); display:flex; align-items:baseline;}
+  .brand .eee{display:inline-flex; flex-direction:column; gap:3px; margin:0 3px 3px; transform:translateY(-2px);}
+  .brand .eee span{display:block; width:12px; height:5px; background:var(--cyan); border-radius:1px;}
+  .top-row{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:8px;}
+  .subtitle{font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-top:4px;}
+  h1{font-family:'Oswald'; font-size:1.7rem; margin:26px 0 6px;}
+  .btn{background:var(--orange); color:#fff; border:none; padding:10px 20px; border-radius:9px; font-weight:700; font-size:.85rem; cursor:pointer;}
+  .btn:hover{background:#ff7748;}
+  .btn.ghost{background:none; border:1px solid var(--line); color:var(--white);}
+  .btn.ghost:hover{border-color:var(--cyan); color:var(--cyan);}
+  .btn-row{display:flex; gap:12px; flex-wrap:wrap;}
+
+  .stat-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin:26px 0 36px;}
+  .stat-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px;}
+  .stat-card .n{font-family:'Oswald'; font-size:2.2rem; color:var(--cyan);}
+  .stat-card .l{font-size:.8rem; color:var(--muted); margin-top:4px;}
+
+  .row-title{font-family:'Oswald'; font-size:1.1rem; text-transform:uppercase; letter-spacing:.05em; margin:36px 0 16px;}
+  .profile-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px;}
+  .profile-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;}
+  .profile-card .name{font-family:'Oswald'; font-size:1.05rem; margin-bottom:8px;}
+  .profile-card .count-row{display:flex; align-items:baseline; gap:8px; margin-bottom:10px;}
+  .profile-card .count{font-family:'Oswald'; font-size:1.6rem; color:var(--cyan);}
+  .profile-card .pct{font-size:.78rem; color:var(--muted);}
+  .p-bar-track{height:8px; background:var(--bg-1); border-radius:6px; overflow:hidden;}
+  .p-bar-fill{height:100%; background:linear-gradient(90deg,var(--cyan),var(--orange)); width:0%; transition:width .8s ease;}
+
+  .table-wrap{overflow-x:auto; margin-top:14px; border:1px solid var(--line); border-radius:12px;}
+  table{width:100%; border-collapse:collapse; font-size:.78rem; min-width:1000px;}
+  th, td{padding:10px 12px; text-align:left; border-bottom:1px solid var(--line); white-space:normal; vertical-align:top;}
+  th{background:var(--bg-1); color:var(--cyan); font-family:'IBM Plex Mono'; font-weight:500; text-transform:uppercase; font-size:.68rem; position:sticky; top:0;}
+  td{color:var(--white);}
+  tr:hover td{background:rgba(255,255,255,0.03);}
+  .empty-state{text-align:center; padding:60px 20px; color:var(--muted);}
+  .loading-state{text-align:center; padding:60px 20px; color:var(--muted); font-family:'IBM Plex Mono'; font-size:.85rem;}
+  .updated-hint{font-size:.74rem; color:var(--muted); margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top-row">
+    <div>
+      <div class="brand"><small>Jeito Revvo de</small><div class="word">LIDE<span class="eee"><span></span><span></span><span></span></span>RAR</div></div>
+      <div class="subtitle">Temporada 2 · Episódio 1 · A Inovação que Morreu na Reunião</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn ghost" onclick="loadData()">🔄 Atualizar dados</button>
+      <button class="btn" onclick="exportCSV()">⬇ Exportar CSV</button>
+    </div>
+  </div>
+
+  <h1>Dashboard de resultados — RH</h1>
+  <div id="content">
+    <div class="loading-state" id="loading-msg">Carregando resultados...</div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAnJNk-zmiPbqIAMM-ypyWc85XSIDM2Ij4",
+  authDomain: "jeito-revvo-liderar.firebaseapp.com",
+  projectId: "jeito-revvo-liderar",
+  storageBucket: "jeito-revvo-liderar.firebasestorage.app",
+  messagingSenderId: "430705793361",
+  appId: "1:430705793361:web:84985a02553a54c94a1b70"
+};
+const FIREBASE_COLLECTION = "csi_revvo_s2e1_resultados";
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const CATS = { processo:'O Processo', cultura:'A Cultura', medo:'O Medo', lider:'A Liderança', combinacao:'Combinação de todos' };
+const PROFILE_TITLES = {
+  processo:'Investigador(a) Sistêmico(a)',
+  cultura:'Guardião(ã) da Cultura',
+  medo:'Desbravador(a) da Coragem',
+  lider:'Autocrítico(a) Corajoso(a)',
+  combinacao:'Investigador(a) Integral'
+};
+const PROFILE_ORDER = ['processo','cultura','medo','lider','combinacao'];
+
+let rows = [];
+
+function loadData(){
+  document.getElementById('content').innerHTML = '<div class="loading-state" id="loading-msg">Carregando resultados...</div>';
+  db.collection(FIREBASE_COLLECTION).orderBy('savedAt','desc').get().then(snap=>{
+    // dedup por pessoa+data: mantém o registro mais completo (o que tiver 'plano') por combinação nome+data
+    const map = {};
+    snap.forEach(doc=>{
+      const d = doc.data();
+      const key = (d.n||'—') + '|' + (d.d||'');
+      if(!map[key] || (d.plano && !map[key].plano)){
+        map[key] = d;
+      }
+    });
+    rows = Object.values(map);
+    render();
+  }).catch(err=>{
+    document.getElementById('content').innerHTML = `<div class="empty-state">Erro ao carregar dados: ${err.message}</div>`;
+  });
+}
+
+function render(){
+  const wrap = document.getElementById('content');
+  if(rows.length === 0){
+    wrap.innerHTML = '<div class="empty-state">Ainda não há resultados registrados.</div>';
+    return;
+  }
+
+  // contagem por perfil
+  const counts = {processo:0, cultura:0, medo:0, lider:0, combinacao:0};
+  rows.forEach(r=>{ if(counts.hasOwnProperty(r.acc)) counts[r.acc]++; else counts.combinacao++; });
+  const total = rows.length;
+  const areas = new Set(rows.map(r=>r.a).filter(Boolean));
+  const comPlano = rows.filter(r=>r.plano).length;
+
+  let html = '';
+  html += `<div class="stat-cards">
+    <div class="stat-card"><div class="n">${total}</div><div class="l">Investigações concluídas</div></div>
+    <div class="stat-card"><div class="n">${areas.size}</div><div class="l">Áreas/times diferentes</div></div>
+    <div class="stat-card"><div class="n">${comPlano}</div><div class="l">Planos de ação gerados</div></div>
+  </div>`;
+
+  html += '<div class="row-title">Perfis de liderança</div><div class="profile-grid">';
+  PROFILE_ORDER.forEach(key=>{
+    const c = counts[key];
+    const pct = total ? Math.round((c/total)*100) : 0;
+    html += `<div class="profile-card">
+      <div class="name">${PROFILE_TITLES[key]}</div>
+      <div class="count-row"><span class="count">${c}</span><span class="pct">${pct}% dos líderes</span></div>
+      <div class="p-bar-track"><div class="p-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  });
+  html += '</div>';
+
+  html += '<div class="row-title">Listagem de respostas</div>';
+  html += '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Nome</th><th>Área</th><th>Data</th><th>Proc.</th><th>Cult.</th><th>Medo</th><th>Líder</th>' +
+    '<th>Perfil final</th><th>Ambientes de Inovação (resposta)</th><th>Compromisso</th>' +
+    '<th>Ação do plano</th><th>Quem sabe</th><th>Sinal de sucesso</th><th>Revisão</th>' +
+    '</tr></thead><tbody>';
+  rows.forEach(r=>{
+    const s = r.s || {};
+    const p = r.plano || {};
+    html += `<tr>
+      <td>${esc(r.n)}</td><td>${esc(r.a)}</td><td>${esc(r.d)}</td>
+      <td>${s.processo??''}</td><td>${s.cultura??''}</td><td>${s.medo??''}</td><td>${s.lider??''}</td>
+      <td>${PROFILE_TITLES[r.acc]||CATS[r.acc]||esc(r.acc)}</td>
+      <td>${esc(r.amb)}</td><td>${esc(r.comp)}</td>
+      <td>${esc(p.acao)}</td><td>${esc(p.quem)}</td><td>${esc(p.sinal)}</td><td>${esc(p.revisao)}</td>
+    </tr>`;
+  });
+  html += '</tbody></table></div>';
+  html += `<div class="updated-hint">Atualizado em ${new Date().toLocaleString('pt-BR')}</div>`;
+
+  wrap.innerHTML = html;
+}
+
+function esc(v){
+  if(v===undefined || v===null) return '';
+  return (v+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function exportCSV(){
+  if(rows.length===0){ alert('Nenhum resultado pra exportar ainda.'); return; }
+  let csv = 'Nome,Área,Data,Processo,Cultura,Medo,Liderança,Perfil Final,Ambientes de Inovação (resposta),Compromisso,Ação do Plano,Quem Sabe,Sinal de Sucesso,Revisão\n';
+  rows.forEach(r=>{
+    const s = r.s || {}; const p = r.plano || {};
+    const line = [r.n, r.a, r.d, s.processo, s.cultura, s.medo, s.lider, PROFILE_TITLES[r.acc]||r.acc, r.amb, r.comp, p.acao, p.quem, p.sinal, p.revisao];
+    csv += line.map(v=>`"${(v??'').toString().replace(/"/g,'""')}"`).join(',') + '\n';
+  });
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'dashboard_rh_csi_revvo_s2e1.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+loadData();
+</script>
+</body>
+</html>
