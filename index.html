@@ -74,6 +74,7 @@
   .lock-badge{position:absolute; top:18px; right:18px; font-size:.7rem; color:var(--muted); border:1px solid var(--line); border-radius:12px; padding:3px 9px;}
   .facilitator-link{position:fixed; bottom:16px; right:20px; font-size:.72rem; color:var(--muted); text-decoration:underline; cursor:pointer; background:none; border:none; font-family:'Inter';}
   .facilitator-link:hover{color:var(--cyan);}
+  .subnav{display:flex; gap:18px; margin-bottom:22px;}
 
   /* ---------- FORM SCREENS (badge / briefing / laudo) ---------- */
   .center-wrap{max-width:640px; margin:0 auto; padding:70px 24px; min-height:100vh; display:flex; flex-direction:column; justify-content:center;}
@@ -287,6 +288,10 @@
 
   <!-- DOSSIÊ -->
   <section id="scr-dossie" class="screen">
+    <div class="subnav">
+      <button class="back-link" onclick="goBack()">← Voltar</button>
+      <button class="back-link" onclick="goMenu()">🏠 Menu principal</button>
+    </div>
     <div class="dossie-head">
       <h2>Dossiê de evidências</h2>
       <div class="progress-pill" id="dossie-progress">0 / 5 analisadas</div>
@@ -302,7 +307,7 @@
     </div>
 
     <div class="dossie-footer">
-      <button class="primary-btn" id="btn-to-interro" onclick="startInterrogatorio()" disabled>Ir para a sala de interrogatório →</button>
+      <button class="primary-btn" id="btn-to-interro" onclick="goTo('scr-interro-intro')" disabled>Ir para a sala de interrogatório →</button>
     </div>
   </section>
 
@@ -319,8 +324,34 @@
     </div>
   </div>
 
+  <!-- INSTRUÇÕES DO INTERROGATÓRIO -->
+  <section id="scr-interro-intro" class="screen">
+    <div class="center-wrap">
+      <div class="subnav">
+        <button class="back-link" onclick="goBack()">← Voltar</button>
+        <button class="back-link" onclick="goMenu()">🏠 Menu principal</button>
+      </div>
+      <div class="eyebrow">Antes de interrogar</div>
+      <h1 class="big">Sala de Interrogatório</h1>
+      <p class="lead">Você já reuniu as evidências do caso. Agora é hora de colocar os suspeitos frente a frente com você.</p>
+      <div class="case-file">
+        <div class="stamp">INSTRUÇÕES</div>
+        <h4>Como funciona essa etapa</h4>
+        Você vai encontrar 4 suspeitos, um de cada vez: <b>o Processo, a Cultura, o Medo</b> e, por último, <b>você mesmo(a) como líder</b>.<br><br>
+        Cada suspeito vai te dar um depoimento — uma explicação, quase uma defesa. Depois, você escolhe como reage, entre 3 respostas possíveis.<br><br>
+        Não existe resposta certa. Mas cada escolha revela um pouco de como você lida, na prática, com inovação que não avança.<br><br>
+        Ao final dos 4 interrogatórios, você vai redigir o laudo de acusação com base em tudo o que ouviu.
+      </div>
+      <button class="primary-btn" onclick="startInterrogatorio()">Chamar o primeiro suspeito →</button>
+    </div>
+  </section>
+
   <!-- INTERROGATÓRIO -->
   <section id="scr-interrogatorio" class="screen">
+    <div class="subnav" style="width:100%; max-width:640px;">
+      <button class="back-link" onclick="goBack()">← Voltar</button>
+      <button class="back-link" onclick="goMenu()">🏠 Menu principal</button>
+    </div>
     <div class="dots" id="interro-dots"></div>
     <div class="interro-card">
       <div class="suspect-name" id="int-name"></div>
@@ -335,12 +366,21 @@
   <!-- LAUDO FINAL -->
   <section id="scr-laudo" class="screen">
     <div class="center-wrap" style="max-width:680px;">
+      <div class="subnav">
+        <button class="back-link" onclick="goBack()">← Voltar</button>
+        <button class="back-link" onclick="goMenu()">🏠 Menu principal</button>
+      </div>
       <div class="eyebrow">Relatório final</div>
       <h1 class="big">Laudo de acusação</h1>
-      <p class="lead">Com base no que você investigou, quem — ou o que — você considera o principal responsável pela morte dessa inovação?</p>
+      <label style="margin-top:0;">1) Quem — ou o que — você considera o principal responsável?</label>
+      <p class="lead" style="margin-bottom:14px;">Com base no que você investigou, quem — ou o que — você considera o principal responsável pela morte dessa inovação?</p>
       <div id="acusacao-opts"></div>
 
-      <label style="margin-top:28px;">Seu compromisso a partir de agora</label>
+      <label style="margin-top:28px;">2) O que você entende por Ambientes de Inovação?</label>
+      <p class="lead" style="margin-bottom:14px;">Com base no que você viu nesta temporada do Jeito Revvo de Liderar, o que é, na prática, um ambiente que favorece a inovação?</p>
+      <textarea id="ambientes-inovacao" rows="4" placeholder="Escreva com suas palavras..."></textarea>
+
+      <label style="margin-top:28px;">3) Seu compromisso a partir de agora</label>
       <p class="lead" style="margin-bottom:14px;">Escolha uma ação concreta que você levará da investigação para a prática — ou escreva a sua.</p>
       <div id="compromisso-opts"></div>
       <textarea id="compromisso-custom" rows="2" placeholder="Ou escreva seu próprio compromisso..." style="margin-top:10px;"></textarea>
@@ -352,6 +392,10 @@
   <!-- VEREDITO -->
   <section id="scr-veredito" class="screen">
     <div class="verdict-wrap">
+      <div class="subnav">
+        <button class="back-link" onclick="goBack()">← Voltar</button>
+        <button class="back-link" onclick="goMenu()">🏠 Página inicial</button>
+      </div>
       <div class="verdict-stamp"><span class="k">Veredito · Episódio 1 encerrado</span></div>
       <div class="verdict-title" id="v-profile-title"></div>
       <div class="verdict-desc" id="v-profile-desc"></div>
@@ -368,16 +412,60 @@
         <b>— Felipe Kinder, Liderança que proporciona ambientes de inovação</b>
       </div>
 
-      <div class="code-box">
-        <div style="font-family:'IBM Plex Mono'; font-size:.75rem; color:var(--muted); margin-bottom:8px;">CÓDIGO DO CASO — envie para o(a) facilitador(a)</div>
-        <textarea id="case-code" readonly></textarea>
-        <div style="margin-top:10px;"><button class="ghost-btn" onclick="copyCode()">📋 Copiar código do caso</button></div>
-      </div>
-      <div class="code-hint">Esse código guarda seu nome, sua área e o resultado da sua investigação. Envie por Slack ou e-mail para o(a) facilitador(a) do programa concluir o arquivo do episódio.</div>
+      <div class="quote-box" id="v-profile-tip" style="border-left-color:var(--orange);"></div>
+      <p class="lead" style="text-align:center; margin-bottom:26px;">No fim das contas, esse ambiente depende de você. Agora monte seu plano de ação.</p>
 
       <div class="verdict-actions">
         <button class="ghost-btn" onclick="restartGame()">🔁 Investigar novamente</button>
-        <button class="ghost-btn" onclick="goTo('scr-admin')">Acesso do(a) facilitador(a)</button>
+        <button class="primary-btn" style="margin-top:0;" onclick="openPlano()">Criar meu plano de ação →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANO DE AÇÃO -->
+  <section id="scr-plano" class="screen">
+    <div class="center-wrap" style="max-width:680px;">
+      <div class="subnav">
+        <button class="back-link" onclick="goBack()">← Voltar ao veredito</button>
+        <button class="back-link" onclick="goMenu()">🏠 Menu principal</button>
+      </div>
+      <div class="eyebrow">Depois do caso encerrado</div>
+      <h1 class="big" id="plano-title">Plano de ação</h1>
+      <p class="lead" id="plano-desc">Vamos transformar o que você descobriu nesta investigação em uma ação prática — pequena, concreta e que caiba na sua rotina.</p>
+
+      <div id="plano-form">
+        <label>1) Qual ação você vai colocar em prática?</label>
+        <p class="lead" style="margin-bottom:8px;">Já trouxemos o compromisso que você assumiu no laudo. Ajuste se quiser.</p>
+        <textarea id="plano-acao" rows="2"></textarea>
+
+        <label style="margin-top:22px;">2) Quem mais precisa saber desse compromisso?</label>
+        <p class="lead" style="margin-bottom:8px;">Uma pessoa que possa te cobrar ou apoiar — o time, seu par, seu gestor.</p>
+        <input type="text" id="plano-quem" placeholder="Ex: vou compartilhar com meu time na próxima reunião">
+
+        <label style="margin-top:22px;">3) Como você vai saber que deu certo?</label>
+        <p class="lead" style="margin-bottom:8px;">Um sinal concreto de que a ação está funcionando.</p>
+        <input type="text" id="plano-sinal" placeholder="Ex: alguém do time vai sugerir algo novo sem hesitar">
+
+        <label style="margin-top:22px;">4) Quando você vai revisar esse compromisso?</label>
+        <div id="plano-revisao-opts"></div>
+
+        <button class="primary-btn" onclick="gerarPlano()">Gerar meu plano de ação →</button>
+      </div>
+
+      <div id="plano-resultado" style="display:none;">
+        <div class="case-file" id="plano-card" style="transform:rotate(0.3deg);">
+          <div class="stamp">CASO ENCERRADO</div>
+          <h4>Plano de ação — <span id="plano-r-perfil"></span></h4>
+          <b>Ação:</b> <span id="plano-r-acao"></span><br><br>
+          <b>Quem sabe disso:</b> <span id="plano-r-quem"></span><br><br>
+          <b>Sinal de sucesso:</b> <span id="plano-r-sinal"></span><br><br>
+          <b>Revisão:</b> <span id="plano-r-revisao"></span><br><br>
+          <b>O que entendi sobre Ambientes de Inovação:</b> <span id="plano-r-ambientes"></span>
+        </div>
+        <div class="verdict-actions" style="margin-top:22px;">
+          <button class="ghost-btn" onclick="downloadPlanoImage()">⬇ Fazer download do plano de ação</button>
+          <button class="ghost-btn" onclick="restartGame()">🔁 Investigar novamente</button>
+        </div>
       </div>
     </div>
   </section>
@@ -390,12 +478,13 @@
     <textarea id="admin-input" rows="5" placeholder="Cole aqui um ou mais códigos de caso, um por linha..."></textarea>
     <div class="admin-actions">
       <button class="primary-btn" style="margin-top:0;" onclick="processAdminCodes()">Processar códigos</button>
+      <button class="ghost-btn" onclick="loadFromFirebase()">☁️ Carregar do Firebase</button>
       <button class="ghost-btn" onclick="exportCSV()">⬇ Exportar CSV</button>
       <button class="ghost-btn" onclick="clearAdminTable()">Limpar tabela</button>
     </div>
     <table class="admin-table" id="admin-table">
       <thead>
-        <tr><th>Nome</th><th>Área</th><th>Data</th><th>Processo</th><th>Cultura</th><th>Medo</th><th>Liderança</th><th>Acusação final</th><th>Compromisso</th></tr>
+        <tr><th>Nome</th><th>Área</th><th>Data</th><th>Processo</th><th>Cultura</th><th>Medo</th><th>Liderança</th><th>Acusação final</th><th>Ambientes de Inovação (resposta)</th><th>Compromisso</th></tr>
       </thead>
       <tbody id="admin-tbody"></tbody>
     </table>
@@ -403,7 +492,33 @@
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
+/* ---------------- FIREBASE (opcional) ----------------
+   Preencha com os dados do seu projeto Firebase (Console > Configurações do projeto > SDK).
+   Enquanto os valores abaixo estiverem como estão, o jogo funciona normalmente
+   usando apenas o "código do caso" manual — o Firebase é só um extra. */
+const firebaseConfig = {
+  apiKey: "AIzaSyAnJNk-zmiPbqIAMM-ypyWc85XSIDM2Ij4",
+  authDomain: "jeito-revvo-liderar.firebaseapp.com",
+  projectId: "jeito-revvo-liderar",
+  storageBucket: "jeito-revvo-liderar.firebasestorage.app",
+  messagingSenderId: "430705793361",
+  appId: "1:430705793361:web:84985a02553a54c94a1b70"
+};
+const FIREBASE_COLLECTION = "csi_revvo_s2e1_resultados";
+let firebaseReady = false;
+let db = null;
+try{
+  if(firebaseConfig.apiKey !== "SUA_API_KEY_AQUI" && typeof firebase !== 'undefined'){
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    firebaseReady = true;
+  }
+}catch(e){ console.warn('Firebase não inicializado:', e); }
+
 /* ---------------- STATE ---------------- */
 let state = {
   nome:'', area:'',
@@ -420,10 +535,26 @@ const CATS = {
 };
 
 /* ---------------- NAV ---------------- */
-function goTo(id){
+let screenHistory = [];
+function activateScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+}
+function goTo(id){
+  const current = document.querySelector('.screen.active');
+  if(current && current.id !== id) screenHistory.push(current.id);
+  activateScreen(id);
+}
+function goBack(){
+  const prev = screenHistory.pop();
+  activateScreen(prev || 'scr-browse');
+}
+function goMenu(){
+  const hasProgress = state.evidencesTagged > 0 || state.nome;
+  if(!hasProgress || confirm('Voltar ao menu principal vai reiniciar sua investigação atual. Deseja continuar?')){
+    restartGame();
+  }
 }
 
 document.getElementById('inp-nome').addEventListener('input', checkBadge);
@@ -712,11 +843,31 @@ function renderLaudo(){
 }
 
 const profiles = {
-  processo:{title:'Investigador(a) Sistêmico(a)', desc:'Você enxerga inovação como uma questão de sistema: sabe que boas ideias precisam de ritos, donos e prazos — não só de boa vontade. Seu próximo passo é transformar essa clareza em rotina.'},
-  cultura:{title:'Guardião(ã) da Cultura', desc:'Você entende que cada reação a um erro constrói — ou destrói — a coragem do time pra propor. Cultura não se decreta, se pratica todos os dias, em gestos pequenos.'},
-  medo:{title:'Desbravador(a) da Coragem', desc:'Você foca em desarmar o medo antes que ele silencie alguém. Sabe que a maioria das ideias não morre de crítica — morre de silêncio.'},
-  lider:{title:'Autocrítico(a) Corajoso(a)', desc:'Você foi capaz de investigar a si mesmo(a) sem se esconder atrás do sistema ou da cultura. Essa costuma ser a liderança mais difícil de exercer — e a mais transformadora.'},
-  combinacao:{title:'Investigador(a) Integral', desc:'Você entendeu que inovação raramente morre de um só golpe — é um efeito em cadeia entre processo, cultura, medo e liderança. Essa visão sistêmica é rara e valiosa.'}
+  processo:{
+    title:'Investigador(a) Sistêmico(a)',
+    desc:'Você enxerga inovação como uma questão de sistema: sabe que boas ideias precisam de ritos, donos e prazos — não só de boa vontade. Seu próximo passo é transformar essa clareza em rotina.',
+    tip:'Uma dica: você olha bastante para o processo. Vale também olhar pra dentro — que parte disso depende de você, pessoalmente, e não só da estrutura ao redor?'
+  },
+  cultura:{
+    title:'Guardião(ã) da Cultura',
+    desc:'Você entende que cada reação a um erro constrói — ou destrói — a coragem do time pra propor. Cultura não se decreta, se pratica todos os dias, em gestos pequenos.',
+    tip:'Uma dica: você enxerga bem o coletivo. Vale perguntar também: o que você, individualmente, já fez — ou deixou de fazer — pra essa cultura mudar?'
+  },
+  medo:{
+    title:'Desbravador(a) da Coragem',
+    desc:'Você foca em desarmar o medo antes que ele silencie alguém. Sabe que a maioria das ideias não morre de crítica — morre de silêncio.',
+    tip:'Uma dica: você é sensível ao medo dos outros. Vale notar também: existe algum medo seu nessa história — de dar feedback, de errar, de ser questionado(a)?'
+  },
+  lider:{
+    title:'Autocrítico(a) Corajoso(a)',
+    desc:'Você foi capaz de investigar a si mesmo(a) sem se esconder atrás do sistema ou da cultura. Essa costuma ser a liderança mais difícil de exercer — e a mais transformadora.',
+    tip:'Uma dica: olhar pra dentro já é raro — parabéns por isso. Agora vale estruturar essa autocrítica em rotina, pra ela não depender só de um momento de lucidez.'
+  },
+  combinacao:{
+    title:'Investigador(a) Integral',
+    desc:'Você entendeu que inovação raramente morre de um só golpe — é um efeito em cadeia entre processo, cultura, medo e liderança. Essa visão sistêmica é rara e valiosa.',
+    tip:'Uma dica: você viu o todo, mas não dá pra atacar tudo ao mesmo tempo. Escolha um único ponto de partida pro seu plano de ação — o resto vem depois.'
+  }
 };
 
 function sealVerdict(){
@@ -725,6 +876,7 @@ function sealVerdict(){
   const customComp = document.getElementById('compromisso-custom').value.trim();
   state.acusacao = accEl ? accEl.value : Object.keys(state.scores).reduce((a,b)=> state.scores[a]>=state.scores[b]?a:b);
   state.compromisso = customComp || (compEl ? compromissoOpts[compEl.value] : 'Não especificado');
+  state.ambientesInovacao = document.getElementById('ambientes-inovacao').value.trim();
   renderVeredito();
   goTo('scr-veredito');
 }
@@ -733,6 +885,7 @@ function renderVeredito(){
   const p = profiles[state.acusacao] || profiles.combinacao;
   document.getElementById('v-profile-title').innerText = p.title;
   document.getElementById('v-profile-desc').innerText = p.desc;
+  document.getElementById('v-profile-tip').innerText = p.tip;
 
   const max = Math.max(1, ...Object.values(state.scores));
   ['processo','cultura','medo','lider'].forEach(cat=>{
@@ -743,28 +896,34 @@ function renderVeredito(){
 
   const payload = {
     n:state.nome, a:state.area, d:new Date().toISOString().slice(0,10),
-    s:state.scores, acc:state.acusacao, comp:state.compromisso, ep:'S2E1'
+    s:state.scores, acc:state.acusacao, comp:state.compromisso,
+    amb:state.ambientesInovacao || '', ep:'S2E1'
   };
-  document.getElementById('case-code').value = encodeCase(payload);
+  lastPayload = payload;
+  lastCaseCode = encodeCase(payload);
+  // tenta salvar silenciosamente na nuvem, se o Firebase estiver configurado neste arquivo
+  if(firebaseReady){
+    db.collection(FIREBASE_COLLECTION).add({...payload, savedAt:new Date().toISOString()}).catch(err=>{
+      console.warn('Não foi possível salvar automaticamente:', err.message);
+    });
+  }
 }
 
-function copyCode(){
-  const box = document.getElementById('case-code');
-  box.select();
-  navigator.clipboard.writeText(box.value).then(()=>{
-    const btn = event.target;
-    const old = btn.innerText;
-    btn.innerText = '✓ copiado!';
-    setTimeout(()=>btn.innerText=old, 1800);
-  });
-}
-
+let lastPayload = null;
+let lastCaseCode = '';
 function restartGame(){
-  state = {nome:'', area:'', scores:{processo:0,cultura:0,medo:0,lider:0}, evidencesTagged:0, acusacao:'', compromisso:''};
+  state = {nome:'', area:'', scores:{processo:0,cultura:0,medo:0,lider:0}, evidencesTagged:0, acusacao:'', compromisso:'', ambientesInovacao:''};
   evidState = evidencias.map(()=>({tagged:false, choice:null}));
+  interroIdx = 0;
+  screenHistory = [];
   document.getElementById('inp-nome').value='';
   document.getElementById('inp-area').value='';
   document.getElementById('compromisso-custom').value='';
+  document.getElementById('ambientes-inovacao').value='';
+  document.getElementById('plano-form').style.display='block';
+  document.getElementById('plano-resultado').style.display='none';
+  document.getElementById('plano-quem').value='';
+  document.getElementById('plano-sinal').value='';
   checkBadge();
   goTo('scr-browse');
 }
@@ -776,6 +935,77 @@ function encodeCase(payload){
 function decodeCase(code){
   try{ return JSON.parse(decodeURIComponent(escape(atob(code.trim())))); }
   catch(e){ return null; }
+}
+
+/* ---------------- PLANO DE AÇÃO ---------------- */
+const revisaoOpts = ['Em 2 semanas', 'Em 1 mês', 'Na próxima reunião de liderança'];
+function openPlano(){
+  renderPlano();
+  goTo('scr-plano');
+}
+function renderPlano(){
+  const p = profiles[state.acusacao] || profiles.combinacao;
+  document.getElementById('plano-title').innerText = 'Plano de ação — ' + p.title;
+  document.getElementById('plano-acao').value = state.compromisso || '';
+  document.getElementById('plano-form').style.display = 'block';
+  document.getElementById('plano-resultado').style.display = 'none';
+  const revWrap = document.getElementById('plano-revisao-opts');
+  revWrap.innerHTML = '';
+  revisaoOpts.forEach((r,i)=>{
+    const label = document.createElement('label');
+    label.className = 'radio-card';
+    label.innerHTML = `<input type="radio" name="plano-revisao" value="${i}" ${i===0?'checked':''}><div class="t">${r}</div>`;
+    revWrap.appendChild(label);
+  });
+}
+function gerarPlano(){
+  const p = profiles[state.acusacao] || profiles.combinacao;
+  const acao = document.getElementById('plano-acao').value.trim() || '—';
+  const quem = document.getElementById('plano-quem').value.trim() || '—';
+  const sinal = document.getElementById('plano-sinal').value.trim() || '—';
+  const revEl = document.querySelector('input[name=plano-revisao]:checked');
+  const revisao = revEl ? revisaoOpts[revEl.value] : revisaoOpts[0];
+
+  document.getElementById('plano-r-perfil').innerText = p.title;
+  document.getElementById('plano-r-acao').innerText = acao;
+  document.getElementById('plano-r-quem').innerText = quem;
+  document.getElementById('plano-r-sinal').innerText = sinal;
+  document.getElementById('plano-r-revisao').innerText = revisao;
+  document.getElementById('plano-r-ambientes').innerText = state.ambientesInovacao || '—';
+
+  state.plano = {acao, quem, sinal, revisao};
+  if(firebaseReady && lastPayload){
+    db.collection(FIREBASE_COLLECTION).add({...lastPayload, plano:state.plano, savedAt:new Date().toISOString()})
+      .catch(err=>console.warn('Não foi possível salvar o plano automaticamente:', err.message));
+  }
+
+  document.getElementById('plano-form').style.display = 'none';
+  document.getElementById('plano-resultado').style.display = 'block';
+}
+function downloadPlanoImage(){
+  const btn = event.target;
+  const old = btn.innerText;
+  const card = document.getElementById('plano-card');
+  const originalTransform = card.style.transform;
+  card.style.transform = 'none';
+  btn.innerText = 'Gerando imagem...';
+  btn.disabled = true;
+  html2canvas(card, {backgroundColor:'#efe8d6', scale:2}).then(canvas=>{
+    card.style.transform = originalTransform;
+    btn.innerText = old;
+    btn.disabled = false;
+    const link = document.createElement('a');
+    link.download = 'plano_de_acao_' + (state.nome||'investigador').replace(/\s+/g,'_') + '.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }).catch(err=>{
+    card.style.transform = originalTransform;
+    btn.innerText = old;
+    btn.disabled = false;
+    alert('Não foi possível gerar a imagem: ' + err.message);
+  });
 }
 
 /* ---------------- ADMIN ---------------- */
@@ -795,7 +1025,7 @@ function renderAdminTable(){
   tbody.innerHTML = '';
   adminRows.forEach(r=>{
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${r.n||''}</td><td>${r.a||''}</td><td>${r.d||''}</td><td>${r.s?r.s.processo:''}</td><td>${r.s?r.s.cultura:''}</td><td>${r.s?r.s.medo:''}</td><td>${r.s?r.s.lider:''}</td><td>${CATS[r.acc]||r.acc||''}</td><td>${r.comp||''}</td>`;
+    tr.innerHTML = `<td>${r.n||''}</td><td>${r.a||''}</td><td>${r.d||''}</td><td>${r.s?r.s.processo:''}</td><td>${r.s?r.s.cultura:''}</td><td>${r.s?r.s.medo:''}</td><td>${r.s?r.s.lider:''}</td><td>${CATS[r.acc]||r.acc||''}</td><td>${r.amb||''}</td><td>${r.comp||''}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -803,11 +1033,22 @@ function clearAdminTable(){
   adminRows = [];
   renderAdminTable();
 }
+function loadFromFirebase(){
+  if(!firebaseReady){ alert('Firebase ainda não configurado neste arquivo.'); return; }
+  db.collection(FIREBASE_COLLECTION).get().then(snap=>{
+    adminRows = [];
+    snap.forEach(doc=>{
+      const d = doc.data();
+      adminRows.push({n:d.n, a:d.a, d:d.d, s:d.s, acc:d.acc, amb:d.amb, comp:d.comp, plano:d.plano});
+    });
+    renderAdminTable();
+  }).catch(err=>alert('Erro ao carregar do Firebase: ' + err.message));
+}
 function exportCSV(){
   if(adminRows.length===0){ alert('Nenhum resultado processado ainda.'); return; }
-  let csv = 'Nome,Área,Data,Processo,Cultura,Medo,Liderança,Acusação Final,Compromisso\n';
+  let csv = 'Nome,Área,Data,Processo,Cultura,Medo,Liderança,Acusação Final,Ambientes de Inovação (resposta),Compromisso\n';
   adminRows.forEach(r=>{
-    const row = [r.n, r.a, r.d, r.s?r.s.processo:'', r.s?r.s.cultura:'', r.s?r.s.medo:'', r.s?r.s.lider:'', CATS[r.acc]||r.acc||'', (r.comp||'').replace(/,/g,';')];
+    const row = [r.n, r.a, r.d, r.s?r.s.processo:'', r.s?r.s.cultura:'', r.s?r.s.medo:'', r.s?r.s.lider:'', CATS[r.acc]||r.acc||'', (r.amb||'').replace(/,/g,';'), (r.comp||'').replace(/,/g,';')];
     csv += row.map(v=>`"${(v+'').replace(/"/g,'""')}"`).join(',') + '\n';
   });
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
