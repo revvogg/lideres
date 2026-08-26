@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · CSI Revvo · Jeito Revvo de Liderar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050810; --bg-1:#0a1220; --bg-2:#0e1c30; --panel:#101f36;
+    --cyan:#2ad2ec; --cyan-dim:#1a7f91; --orange:#ff5a2b;
+    --white:#f3f6fb; --muted:#7d8ba7; --line:rgba(255,255,255,0.08);
+    --good:#38c07a; --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;}
+  ::selection{background:var(--cyan); color:#04060c;}
+
+  /* ---- gate ---- */
+  #gate{min-height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; padding:20px; text-align:center;}
+  #gate .logo{height:46px; margin-bottom:10px;}
+  #gate input{background:var(--panel); border:1px solid var(--line); color:var(--white); padding:12px 14px; border-radius:10px; font-size:.95rem; width:240px; font-family:'IBM Plex Mono';}
+  #gate button{background:var(--orange); color:#1a0800; border:none; padding:12px 20px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Inter';}
+  #gate button:hover{filter:brightness(1.08);}
+  #gate .err{color:#ff7a6b; font-size:.82rem; height:14px;}
+
+  #app{display:none; max-width:1180px; margin:0 auto; padding:32px 5vw 80px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:28px;}
+  header.top img{height:40px;}
+  header.top .meta{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.08em; color:var(--muted); text-transform:uppercase;}
+  h1{font-family:'Oswald'; font-weight:600; font-size:1.5rem; margin:0 0 4px;}
+  .sub{color:var(--muted); font-size:.88rem; margin:0 0 28px;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:12px; margin-bottom:28px;}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px;}
+  .stat .n{font-family:'Oswald'; font-size:1.8rem; color:var(--cyan);}
+  .stat .l{font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:2px;}
+
+  .toolbar{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px;}
+  .toolbar input[type=text]{flex:1; min-width:180px; background:var(--panel); border:1px solid var(--line); color:var(--white); padding:10px 12px; border-radius:9px; font-family:'Inter'; font-size:.85rem;}
+  .btn{background:var(--panel); border:1px solid var(--line); color:var(--white); padding:10px 14px; border-radius:9px; font-size:.82rem; cursor:pointer; font-family:'Inter'; white-space:nowrap;}
+  .btn:hover{border-color:var(--cyan);}
+  .btn.primary{background:var(--orange); border-color:var(--orange); color:#1a0800; font-weight:700;}
+
+  .empty{color:var(--muted); padding:60px 20px; text-align:center; border:1px dashed var(--line); border-radius:var(--radius);}
+
+  table{width:100%; border-collapse:collapse; font-size:.82rem; background:var(--panel); border-radius:var(--radius); overflow:hidden;}
+  thead th{background:var(--bg-2); color:var(--cyan); font-family:'IBM Plex Mono'; font-weight:500; font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; text-align:left; padding:10px 10px; white-space:nowrap;}
+  tbody td{padding:10px 10px; border-top:1px solid var(--line); vertical-align:top;}
+  tbody tr:hover{background:rgba(42,210,236,.04);}
+  .name{font-weight:600;}
+  .area{color:var(--muted); font-size:.76rem;}
+  .score{font-family:'IBM Plex Mono'; font-size:.78rem;}
+  .plano-yes{color:var(--good); font-size:.72rem; font-family:'IBM Plex Mono';}
+  .plano-no{color:var(--muted); font-size:.72rem; font-family:'IBM Plex Mono';}
+  .expand-btn{background:none; border:none; color:var(--cyan); cursor:pointer; font-size:.78rem; text-decoration:underline; font-family:'Inter'; padding:0;}
+  tr.detail-row td{background:rgba(255,255,255,.02); padding:16px 14px;}
+  tr.detail-row{display:none;}
+  tr.detail-row.open{display:table-row;}
+  .detail-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .detail-grid h5{margin:0 0 4px; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--cyan); font-family:'IBM Plex Mono'; font-weight:500;}
+  .detail-grid p{margin:0; font-size:.85rem; color:var(--white); line-height:1.4;}
+
+  #loading{color:var(--muted); padding:40px; text-align:center;}
+  footer.note{margin-top:26px; color:var(--muted); font-size:.72rem; line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <img class="logo" src="https://email-editor-production.s3.amazonaws.com/images/338724/Logo%20Tempor%C3%A1rio%20-%20Jeito%20Revvo%20de%20Liderar.png" alt="Jeito Revvo de Liderar">
+  <div style="font-family:'Oswald'; font-size:1.1rem;">Dashboard de resultados · CSI Revvo</div>
+  <input type="password" id="gate-pass" placeholder="senha de acesso" autocomplete="off">
+  <button onclick="checkPass()">Entrar</button>
+  <div class="err" id="gate-err"></div>
+</div>
+
+<div id="app">
+  <header class="top">
+    <img src="https://email-editor-production.s3.amazonaws.com/images/338724/Logo%20Tempor%C3%A1rio%20-%20Jeito%20Revvo%20de%20Liderar.png" alt="Jeito Revvo de Liderar">
+    <div class="meta">CSI Revvo · Temporada 2 · Episódio 1</div>
+  </header>
+  <h1>Resultados da investigação</h1>
+  <p class="sub">Quem já participou, o perfil identificado e o compromisso assumido em cada plano de ação.</p>
+
+  <div class="stat-row" id="stats"></div>
+
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="Buscar por nome ou área..." oninput="renderTable()">
+    <button class="btn" onclick="loadData()">↻ Atualizar</button>
+    <button class="btn primary" onclick="exportCSV()">⬇ Exportar CSV</button>
+  </div>
+
+  <div id="loading">Carregando resultados...</div>
+  <div id="table-wrap" style="overflow-x:auto;"></div>
+
+  <footer class="note">Dados carregados diretamente do Firebase do episódio (coleção csi_revvo_s2e1_resultados). Cada participante gera até dois registros — um ao ver o veredito e outro ao concluir o plano de ação — que são agrupados aqui automaticamente por nome + área + data.</footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ---------------- ACESSO ---------------- */
+const DASH_PASS = 'revvo2026';
+function checkPass(){
+  const val = document.getElementById('gate-pass').value;
+  if(val === DASH_PASS){
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadData();
+  } else {
+    document.getElementById('gate-err').innerText = 'Senha incorreta.';
+  }
+}
+document.getElementById('gate-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') checkPass(); });
+
+/* ---------------- FIREBASE ---------------- */
+const firebaseConfig = {
+  apiKey: "AIzaSyAnJNk-zmiPbqIAMM-ypyWc85XSIDM2Ij4",
+  authDomain: "jeito-revvo-liderar.firebaseapp.com",
+  projectId: "jeito-revvo-liderar",
+  storageBucket: "jeito-revvo-liderar.firebasestorage.app",
+  messagingSenderId: "430705793361",
+  appId: "1:430705793361:web:84985a02553a54c94a1b70"
+};
+const FIREBASE_COLLECTION = "csi_revvo_s2e1_resultados";
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const CATS = { processo:'O Processo', cultura:'A Cultura', medo:'O Medo', lider:'A Liderança' };
+const PROFILE_TITLES = {
+  processo:'Investigador(a) Sistêmico(a)',
+  cultura:'Guardião(ã) da Cultura',
+  medo:'Desbravador(a) da Coragem',
+  lider:'Autocrítico(a) Corajoso(a)',
+  combinacao:'Investigador(a) Integral'
+};
+
+let rows = [];
+
+function loadData(){
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('loading').innerText = 'Carregando resultados...';
+  document.getElementById('table-wrap').innerHTML = '';
+  db.collection(FIREBASE_COLLECTION).orderBy('savedAt','asc').get().then(snap=>{
+    const grouped = {};
+    snap.forEach(doc=>{
+      const d = doc.data();
+      const key = (d.n||'').trim().toLowerCase() + '|' + (d.a||'').trim().toLowerCase() + '|' + (d.d||'');
+      if(!grouped[key]) grouped[key] = {};
+      // merge: campos mais recentes (inclusive plano) sobrescrevem os anteriores
+      grouped[key] = {...grouped[key], ...d};
+    });
+    rows = Object.values(grouped).sort((a,b)=> (b.savedAt||'').localeCompare(a.savedAt||''));
+    document.getElementById('loading').style.display = 'none';
+    renderStats();
+    renderTable();
+  }).catch(err=>{
+    document.getElementById('loading').innerText = 'Erro ao carregar do Firebase: ' + err.message;
+  });
+}
+
+function renderStats(){
+  const wrap = document.getElementById('stats');
+  const total = rows.length;
+  const comPlano = rows.filter(r=>r.plano).length;
+  const counts = {};
+  rows.forEach(r=>{ const k = r.acc||'combinacao'; counts[k] = (counts[k]||0)+1; });
+  let topPerfil = '—';
+  if(total>0){
+    const topKey = Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0];
+    topPerfil = PROFILE_TITLES[topKey] || topKey;
+  }
+  wrap.innerHTML = `
+    <div class="stat"><div class="n">${total}</div><div class="l">Participantes</div></div>
+    <div class="stat"><div class="n">${comPlano}</div><div class="l">Com plano de ação</div></div>
+    <div class="stat"><div class="n" style="font-size:1.05rem; line-height:1.3;">${topPerfil}</div><div class="l">Perfil mais comum</div></div>
+  `;
+}
+
+function renderTable(){
+  const wrap = document.getElementById('table-wrap');
+  const q = (document.getElementById('search').value||'').trim().toLowerCase();
+  const filtered = rows.filter(r=>{
+    if(!q) return true;
+    return (r.n||'').toLowerCase().includes(q) || (r.a||'').toLowerCase().includes(q);
+  });
+
+  if(filtered.length===0){
+    wrap.innerHTML = '<div class="empty">Nenhum resultado encontrado ainda.</div>';
+    return;
+  }
+
+  let html = `<table><thead><tr>
+    <th>Nome</th><th>Área</th><th>Data</th>
+    <th>Processo</th><th>Cultura</th><th>Medo</th><th>Liderança</th>
+    <th>Perfil (acusação)</th><th>Plano de ação</th><th></th>
+  </tr></thead><tbody>`;
+
+  filtered.forEach((r, i)=>{
+    const s = r.s || {};
+    html += `<tr>
+      <td class="name">${esc(r.n)}</td>
+      <td class="area">${esc(r.a)}</td>
+      <td>${esc(r.d)}</td>
+      <td class="score">${s.processo??''}</td>
+      <td class="score">${s.cultura??''}</td>
+      <td class="score">${s.medo??''}</td>
+      <td class="score">${s.lider??''}</td>
+      <td>${esc(PROFILE_TITLES[r.acc] || r.acc || '—')}</td>
+      <td>${r.plano ? '<span class="plano-yes">✓ concluído</span>' : '<span class="plano-no">— pendente</span>'}</td>
+      <td><button class="expand-btn" onclick="toggleDetail(${i})">detalhes</button></td>
+    </tr>
+    <tr class="detail-row" id="detail-${i}">
+      <td colspan="10">
+        <div class="detail-grid">
+          <div><h5>Compromisso assumido</h5><p>${esc(r.comp) || '—'}</p></div>
+          <div><h5>Resposta · Ambientes de Inovação</h5><p>${esc(r.amb) || '—'}</p></div>
+          ${r.plano ? `
+            <div><h5>Plano · Ação</h5><p>${esc(r.plano.acao)||'—'}</p></div>
+            <div><h5>Plano · Quem apoia</h5><p>${esc(r.plano.quem)||'—'}</p></div>
+            <div><h5>Plano · Sinal de sucesso</h5><p>${esc(r.plano.sinal)||'—'}</p></div>
+            <div><h5>Plano · Revisão</h5><p>${esc(r.plano.revisao)||'—'}</p></div>
+          ` : ''}
+        </div>
+      </td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+}
+
+function toggleDetail(i){
+  document.getElementById('detail-'+i).classList.toggle('open');
+}
+
+function esc(v){
+  if(v===undefined || v===null) return '';
+  return (v+'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function exportCSV(){
+  if(rows.length===0){ alert('Nenhum resultado carregado ainda.'); return; }
+  let csv = 'Nome,Área,Data,Processo,Cultura,Medo,Liderança,Perfil,Compromisso,Ambientes de Inovação,Plano - Ação,Plano - Quem,Plano - Sinal,Plano - Revisão\n';
+  rows.forEach(r=>{
+    const s = r.s || {};
+    const p = r.plano || {};
+    const row = [r.n, r.a, r.d, s.processo, s.cultura, s.medo, s.lider,
+      PROFILE_TITLES[r.acc]||r.acc||'', r.comp, r.amb, p.acao, p.quem, p.sinal, p.revisao];
+    csv += row.map(v=>`"${((v??'')+'').replace(/"/g,'""')}"`).join(',') + '\n';
+  });
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'CSI_Revvo_S2E1_resultados.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
