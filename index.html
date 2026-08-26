@@ -268,9 +268,9 @@ Você é o investigador(a) chamado(a) pra reabrir o caso.</p>
       <div class="case-file">
         <div class="stamp">CONFIDENCIAL</div>
         <h4>Resumo do caso</h4>
-        Há três meses, Fernanda — analista de um dos nossos times — sugeriu, em reunião, uma ideia simples para melhorar um processo do dia a dia.<br><br>
+        Há três meses, Revvolucia — nossa analista de um dos nossos times — sugeriu, em reunião, uma ideia simples para melhorar um processo do dia a dia.<br><br>
         A ideia foi ouvida. Ninguém discordou. E, no entanto, nunca mais foi mencionada.<br><br>
-        Nas últimas semanas, Fernanda parou de levantar a mão nas reuniões. Ninguém sabe dizer exatamente quando isso começou.<br><br>
+        Nas últimas semanas, Revvolucia parou de levantar a mão nas reuniões. Ninguém sabe dizer exatamente quando isso começou.<br><br>
         Você foi chamado(a) para reabrir o caso e responder à pergunta que ninguém fez em voz alta:<br>
         <b>quem — ou o que — matou essa inovação?</b>
       </div>
@@ -548,22 +548,22 @@ setTimeout(()=>{ if(document.getElementById('scr-loading').classList.contains('a
 /* ---------------- DOSSIÊ / EVIDÊNCIAS ---------------- */
 const evidencias = [
   {
-    icon:'📧', title:'E-mail: "Re: ideia da Fernanda"',
-    teaser:'Trocado entre Fernanda e o líder direto',
+    icon:'📧', title:'E-mail: "Re: ideia da Revvolucia"',
+    teaser:'Trocado entre Revvolucia e o líder direto',
     tag:'CORRESPONDÊNCIA',
-    content:'De: Fernanda\n"Segue o resumo da ideia que comentei na reunião, achei que poderia simplificar bastante nosso relatório mensal."\n\nResposta do líder, 12 dias depois:\n"Boa ideia! Vamos alinhar isso em algum momento."\n\n(Nenhuma outra mensagem no fio.)',
+    content:'De: Revvolucia\n"Segue o resumo da ideia que comentei na reunião, achei que poderia simplificar bastante nosso relatório mensal."\n\nResposta do líder, 12 dias depois:\n"Boa ideia! Vamos alinhar isso em algum momento."\n\n(Nenhuma outra mensagem no fio.)',
     feedback:{
       processo:'Faz sentido pensar em processo: não existia um canal para essa ideia ser rastreada até uma decisão. Mas repare — havia uma resposta pendente também, o que aponta pra mais de um fator.',
       lider:'Boa leitura. A resposta genérica e sem prazo é um sinal clássico de intenção sem follow-up — o tipo de gesto que, sozinho, já sinaliza baixa prioridade pra quem propôs.',
       cultura:'É possível, mas essa evidência específica fala mais sobre um gesto individual (a resposta) do que sobre um padrão coletivo do time.',
-      medo:'Interessante hipótese, mas aqui ainda não há sinal de medo — Fernanda enviou a ideia sem hesitar. O silêncio veio depois, de quem respondeu.'
+      medo:'Interessante hipótese, mas aqui ainda não há sinal de medo — Revvolucia enviou a ideia sem hesitar. O silêncio veio depois, de quem respondeu.'
     }
   },
   {
     icon:'📝', title:'Ata da reunião de equipe',
     teaser:'Registro oficial, 14 minutos de reunião',
     tag:'DOCUMENTO INTERNO',
-    content:'14min — Fernanda sugere automatizar o relatório X.\nAção: (em branco)\nResponsável: (em branco)\nPróximo item da pauta.',
+    content:'14min — Revvolucia sugere automatizar o relatório X.\nAção: (em branco)\nResponsável: (em branco)\nPróximo item da pauta.',
     feedback:{
       processo:'Exato. Não existe rito de captura: nenhuma ação, nenhum responsável, nenhum prazo. A ideia simplesmente não tinha pra onde ir depois de dita em voz alta.',
       lider:'Também é plausível — quem conduz a reunião decide o que vira ação. Mas o vazio no campo "responsável" é, estruturalmente, um sintoma de processo.',
@@ -703,9 +703,9 @@ const interrogatorios = [
   },
   {
     name:'O Medo', sub:'Suspeito nº 3',
-    testimony:'"Eu apareço quando alguém acha que vai ser julgado. Fernanda sentiu isso quando ninguém respondeu de verdade. Eu não preciso de motivo grande pra crescer — só de silêncio."',
+    testimony:'"Eu apareço quando alguém acha que vai ser julgado. Revvolucia sentiu isso quando ninguém respondeu de verdade. Eu não preciso de motivo grande pra crescer — só de silêncio."',
     answers:[
-      {text:'Vou perguntar diretamente pra Fernanda o que aconteceu com a ideia dela.', cat:'medo', weight:2, feedback:'Ação reparadora concreta e pessoal — o tipo de gesto que devolve confiança individualmente, não só em teoria.'},
+      {text:'Vou perguntar diretamente pra Revvolucia o que aconteceu com a ideia dela.', cat:'medo', weight:2, feedback:'Ação reparadora concreta e pessoal — o tipo de gesto que devolve confiança individualmente, não só em teoria.'},
       {text:'Isso é mais sobre a personalidade dela do que sobre mim.', cat:'medo', weight:1, feedback:'Essa resposta terceiriza o problema. Vale notar: o silêncio institucional afeta qualquer pessoa, independente de personalidade.'},
       {text:'Vou criar um espaço onde até ideias ruins são bem-vindas, sem julgamento.', cat:'medo', weight:2, feedback:'Resposta sistêmica: ataca a raiz do medo, não só o sintoma de uma pessoa.'}
     ]
