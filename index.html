@@ -72,8 +72,6 @@
   .ep-card.locked{opacity:.45; cursor:default;}
   .ep-card.locked:hover{transform:none; border-color:var(--line);}
   .lock-badge{position:absolute; top:18px; right:18px; font-size:.7rem; color:var(--muted); border:1px solid var(--line); border-radius:12px; padding:3px 9px;}
-  .facilitator-link{position:fixed; bottom:16px; right:20px; font-size:.72rem; color:var(--muted); text-decoration:underline; cursor:pointer; background:none; border:none; font-family:'Inter';}
-  .facilitator-link:hover{color:var(--cyan);}
   .subnav{display:flex; gap:18px; margin-bottom:22px;}
 
   /* ---------- FORM SCREENS (badge / briefing / laudo) ---------- */
@@ -189,12 +187,6 @@
   .verdict-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
 
   /* ---------- ADMIN ---------- */
-  #scr-admin{padding:44px 6vw 90px; max-width:1000px; margin:0 auto;}
-  #scr-admin h2{font-family:'Oswald'; font-size:1.5rem;}
-  table.admin-table{width:100%; border-collapse:collapse; margin-top:20px; font-size:.8rem;}
-  table.admin-table th, table.admin-table td{border-bottom:1px solid var(--line); padding:9px 8px; text-align:left;}
-  table.admin-table th{color:var(--cyan); font-family:'IBM Plex Mono'; font-weight:500; font-size:.72rem; text-transform:uppercase;}
-  .admin-actions{display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;}
   .back-link{color:var(--muted); font-size:.82rem; cursor:pointer; text-decoration:underline; background:none; border:none; font-family:'Inter';}
   .back-link:hover{color:var(--cyan);}
 
@@ -222,7 +214,7 @@
   <!-- BROWSE -->
   <section id="scr-browse" class="screen">
     <div class="browse-top">
-      <div class="brand"><small>Jeito Revvo de</small><div class="word">LIDE<span class="eee"><span></span><span></span><span></span></span>RAR</div></div>
+      <div class="brand"><img src="https://email-editor-production.s3.amazonaws.com/images/338724/Logo%20Tempor%C3%A1rio%20-%20Jeito%20Revvo%20de%20Liderar.png" alt="Jeito Revvo de Liderar" style="height:44px; width:auto;"></div>
       <div class="season-tag">TEMPORADA 2 · JULHO</div>
     </div>
 
@@ -251,7 +243,6 @@
       Facilitação: Felipe Kinder<br><br>
       Baseado em fatos organizacionais que acontecem com mais frequência do que gostaríamos.
     </div>
-    <button class="facilitator-link" onclick="goTo('scr-admin')">Acesso do(a) facilitador(a) →</button>
   </section>
 
   <!-- BADGE / IDENTIFICAÇÃO -->
@@ -470,25 +461,6 @@
     </div>
   </section>
 
-  <!-- ADMIN -->
-  <section id="scr-admin" class="screen">
-    <button class="back-link" onclick="goTo('scr-browse')">← voltar ao catálogo</button>
-    <h2>Painel do(a) facilitador(a) — Temporada 2, Episódio 1</h2>
-    <p class="lead" style="margin-top:6px;">Cole abaixo um código de caso por linha (recebidos via Slack/e-mail dos líderes) e processe para montar a tabela de resultados.</p>
-    <textarea id="admin-input" rows="5" placeholder="Cole aqui um ou mais códigos de caso, um por linha..."></textarea>
-    <div class="admin-actions">
-      <button class="primary-btn" style="margin-top:0;" onclick="processAdminCodes()">Processar códigos</button>
-      <button class="ghost-btn" onclick="loadFromFirebase()">☁️ Carregar do Firebase</button>
-      <button class="ghost-btn" onclick="exportCSV()">⬇ Exportar CSV</button>
-      <button class="ghost-btn" onclick="clearAdminTable()">Limpar tabela</button>
-    </div>
-    <table class="admin-table" id="admin-table">
-      <thead>
-        <tr><th>Nome</th><th>Área</th><th>Data</th><th>Processo</th><th>Cultura</th><th>Medo</th><th>Liderança</th><th>Acusação final</th><th>Ambientes de Inovação (resposta)</th><th>Compromisso</th></tr>
-      </thead>
-      <tbody id="admin-tbody"></tbody>
-    </table>
-  </section>
 
 </div>
 
@@ -1008,55 +980,6 @@ function downloadPlanoImage(){
   });
 }
 
-/* ---------------- ADMIN ---------------- */
-let adminRows = [];
-function processAdminCodes(){
-  const raw = document.getElementById('admin-input').value;
-  const lines = raw.split('\n').map(l=>l.trim()).filter(Boolean);
-  lines.forEach(code=>{
-    const d = decodeCase(code);
-    if(d) adminRows.push(d);
-  });
-  document.getElementById('admin-input').value='';
-  renderAdminTable();
-}
-function renderAdminTable(){
-  const tbody = document.getElementById('admin-tbody');
-  tbody.innerHTML = '';
-  adminRows.forEach(r=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${r.n||''}</td><td>${r.a||''}</td><td>${r.d||''}</td><td>${r.s?r.s.processo:''}</td><td>${r.s?r.s.cultura:''}</td><td>${r.s?r.s.medo:''}</td><td>${r.s?r.s.lider:''}</td><td>${CATS[r.acc]||r.acc||''}</td><td>${r.amb||''}</td><td>${r.comp||''}</td>`;
-    tbody.appendChild(tr);
-  });
-}
-function clearAdminTable(){
-  adminRows = [];
-  renderAdminTable();
-}
-function loadFromFirebase(){
-  if(!firebaseReady){ alert('Firebase ainda não configurado neste arquivo.'); return; }
-  db.collection(FIREBASE_COLLECTION).get().then(snap=>{
-    adminRows = [];
-    snap.forEach(doc=>{
-      const d = doc.data();
-      adminRows.push({n:d.n, a:d.a, d:d.d, s:d.s, acc:d.acc, amb:d.amb, comp:d.comp, plano:d.plano});
-    });
-    renderAdminTable();
-  }).catch(err=>alert('Erro ao carregar do Firebase: ' + err.message));
-}
-function exportCSV(){
-  if(adminRows.length===0){ alert('Nenhum resultado processado ainda.'); return; }
-  let csv = 'Nome,Área,Data,Processo,Cultura,Medo,Liderança,Acusação Final,Ambientes de Inovação (resposta),Compromisso\n';
-  adminRows.forEach(r=>{
-    const row = [r.n, r.a, r.d, r.s?r.s.processo:'', r.s?r.s.cultura:'', r.s?r.s.medo:'', r.s?r.s.lider:'', CATS[r.acc]||r.acc||'', (r.amb||'').replace(/,/g,';'), (r.comp||'').replace(/,/g,';')];
-    csv += row.map(v=>`"${(v+'').replace(/"/g,'""')}"`).join(',') + '\n';
-  });
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'CSI_Revvo_S2E1_resultados.csv';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-}
 </script>
 </body>
 </html>
